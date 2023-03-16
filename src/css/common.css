@@ -1,0 +1,87 @@
+@charset "utf-8";
+
+body {
+  min-width: 1400px;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* base */
+.blind {
+  visibility: hidden;
+  overflow: hidden;
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  color: transparent;
+}
+.hanwhaGothicT {
+  color: rgb(255, 192, 0);
+}
+.hanwhaGothicEL {
+  color: rgb(255, 192, 0);
+}
+.hanwhaGothicL {
+  color: rgb(255, 192, 0);
+}
+.hanwhaGothicR {
+  color: rgb(255, 192, 0);
+}
+.yellow {
+  color: rgb(255, 192, 0) !important;
+}
+.yellow2 {
+  color: rgb(255, 192, 0) !important;
+}
+.fw-300 {
+  font-weight: 300 !important;
+}
+.fw-500 {
+  font-weight: 500 !important;
+}
+.fw-700 {
+  font-weight: 700 !important;
+}
+
+/* container */
+#container {
+  overflow-x: hidden;
+  font-family: "HanwhaGothicB", sans-serif;
+  padding-bottom: 230px;
+}
+#container .btn_area {
+  font-family: "MyriadPro-Regular", sans-serif;
+  font-size: 0;
+  text-align: center;
+}
+#container .btn_area a {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  height: 62px;
+  font-size: 16px;
+  line-height: 62px;
+  padding: 0 52px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  z-index: 1;
+}
+#container .btn_area a:hover {
+  border-color: rgb(255, 192, 0);
+}
+#container .btn_area a span {
+  display: block;
+  content: "";
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgb(255, 192, 0);
+  z-index: -1;
+}

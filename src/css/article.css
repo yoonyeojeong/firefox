@@ -1,0 +1,200 @@
+@keyframes intro_dimmde {
+  0% {
+    opacity: 1;
+    z-index: 90;
+  }
+  100% {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes intro_img {
+  0% {
+    filter: blur(30px);
+    transform: scale(2);
+    opacity: 0.3;
+  }
+  50% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(30px);
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+#container {
+  overflow-x: hidden;
+  padding-bottom: 230px;
+}
+#container .btn_area {
+  font-size: 0;
+  text-align: center;
+}
+#container .btn_area a {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  height: 62px;
+  font-size: 16px;
+  line-height: 62px;
+  padding: 0 52px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  z-index: 1;
+}
+#container .btn_area a:hover {
+  border-color: rgb(255, 192, 0);
+}
+#container .btn_area a span {
+  display: block;
+  content: "";
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgb(255, 192, 0);
+  z-index: -1;
+}
+
+#container.main {
+  padding-bottom: 240px;
+  background: #000;
+}
+
+#container.main .intro_motion {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: intro_dimmde 1s ease-in 1 normal;
+  animation-delay: 3s;
+  animation-fill-mode: forwards;
+  z-index: 90;
+  opacity: 1;
+}
+#container.main .intro_motion:before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+#container.main .intro_motion img {
+  display: block;
+  position: absolute;
+  top: calc(50% - 65px);
+  left: calc(50% - 420px);
+  transform: scale(2);
+  filter: blur(30px);
+  opacity: 0.3;
+  animation: intro_img 3s ease-in 1 normal;
+  animation-fill-mode: forwards;
+}
+#container.main .intro_motion img.mobile_only {
+  top: 230px;
+  left: calc(50% - 180px);
+  width: 360px;
+}
+
+#id_1 {
+  z-index: 0;
+}
+
+#id_2 {
+  clip: rect(308px, 9999px, 176px, 0px);
+  right: 1px;
+  left: 1px;
+}
+
+#id_3 {
+  z-index: 2;
+  clip: rect(607px, 9999px, 1240px, 0px);
+  left: 0px;
+  right: 1px;
+  transform: scale(1);
+}
+
+#id_4 {
+  z-index: 3;
+  mix-blend-mode: hue;
+  clip: rect(1117px, 9999px, 1120px, 0px);
+  left: 1px;
+  right: 3px;
+  transform: scale(1);
+}
+
+#id_5 {
+  z-index: 0;
+}
+
+#id_6 {
+  clip: rect(1378px, 9999px, 448px, 0px);
+  right: 1px;
+  left: 0px;
+}
+
+#id_7 {
+  z-index: 2;
+  clip: rect(747px, 9999px, 382px, 0px);
+  left: 0px;
+  right: 2px;
+  transform: scale(1);
+}
+
+#id_8 {
+  z-index: 3;
+  mix-blend-mode: hue;
+  clip: rect(1760px, 9999px, 112px, 0px);
+  left: 2px;
+  right: 0px;
+  transform: scale(1);
+}
+
+#id_9 {
+  z-index: 0;
+}
+
+#id_10 {
+  clip: rect(1121px, 9999px, 1011px, 0px);
+  right: 0px;
+  left: 0px;
+}
+
+#id_11 {
+  z-index: 2;
+  clip: rect(556px, 9999px, 231px, 0px);
+  left: 1px;
+  right: 2px;
+  transform: scale(1);
+}
+
+#id_12 {
+  z-index: 3;
+  mix-blend-mode: hue;
+  clip: rect(896px, 9999px, 1262px, 0px);
+  left: 3px;
+  right: 1px;
+  transform: scale(1);
+}
+
+#home_img {
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}

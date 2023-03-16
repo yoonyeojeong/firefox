@@ -1,0 +1,168 @@
+.join_us {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  width: 500px;
+  height: 1050px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.9);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+.join_us_title {
+  padding-top: 55px;
+  color: white;
+  font-weight: bold;
+  padding-bottom: 25px;
+}
+
+.join_us > h4 {
+  color: #808080;
+  font-weight: bold;
+}
+
+.join_us_form {
+  text-align: left;
+  width: 320px;
+  height: 35px;
+  border: none;
+  border-bottom: solid 3px black;
+  background: white;
+}
+.join_us_user_gender > ul {
+  text-align: left;
+  margin-left: 90px;
+}
+
+.join_radio {
+  appearance: auto;
+  display: inline;
+}
+
+#save_id {
+  background-color: #444444;
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#save_id:checked {
+  background: rgb(255, 192, 0);
+  border: none;
+}
+
+input::placeholder {
+  font-size: 10px;
+}
+
+.join_us_user_id {
+  position: flex;
+  margin-top: 20px;
+  padding-top: 19px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.join_us_user_id > p,
+.join_us_user_name > p,
+.join_us_user_bd > p,
+.join_us_user_pw > p,
+.join_us_user_email > p,
+.join_us_user_num > p,
+.join_us_user_address > p,
+.join_us_user_gender > p {
+  margin-left: 90px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.join_us_user_pw,
+.join_us_user_name,
+.join_us_user_bd,
+.join_us_user_email,
+.join_us_user_num,
+.join_us_user_address,
+.join_us_user_gender {
+  position: flex;
+  padding-top: 22px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.div_button {
+  margin: 20px;
+  position: flex;
+}
+
+.button1 {
+  width: 320px;
+  margin-top: 35px;
+  margin-bottom: 10px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #444444;
+}
+
+.button2 {
+  font-size: 13px;
+  font-weight: bold;
+  vertical-align: middle;
+  height: 15px;
+  text-decoration: underline;
+  color: rgb(255, 192, 0);
+}
+
+.div_button1 :hover {
+  background: rgb(255, 192, 0);
+  color: black;
+}
+
+.login_txt_left {
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 50px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.login_txt_left > span {
+  vertical-align: middle;
+}
+.joinus_button {
+  margin: 5px;
+}
+
+.login_txt_q {
+  color: #808080;
+  font-size: 13px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+.login_find {
+  color: #808080;
+  font-size: 12px;
+}
+.join_us_user_gender {
+  justify-content: space-between;
+}
+
+.join_us_form_e {
+  text-align: left;
+  width: 148px;
+  height: 35px;
+  border: none;
+  border-bottom: solid 3px black;
+  background: white;
+}
+
+.join_us_form_num {
+  width: 95px;
+  height: 35px;
+}

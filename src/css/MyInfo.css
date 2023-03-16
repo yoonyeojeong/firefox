@@ -1,0 +1,49 @@
+.myinfo {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: center;
+}
+
+.myinfo_box {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 800px;
+  padding: 20px;
+}
+.myinfo_content_box > tr > td {
+  vertical-align: middle;
+}
+
+#myinfo_txt_top1,
+#myinfo_txt_top2 {
+  vertical-align: top;
+}
+
+.myinfo_content_box > tr:first-child {
+  border-top: solid 2px rgb(255, 192, 0);
+}
+.myinfo_content_box > tr > td {
+  font-size: 18px;
+  padding: 10px;
+  border-bottom: solid 1px rgb(255, 192, 0);
+  line-height: 130%;
+}
+
+.myinfo_box > p {
+  text-align: left;
+  margin: 10px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+.myinfo_button {
+  background-color: #656565;
+  border-radius: 3px;
+  margin-left: 10px;
+  padding: 4px;
+}
+.myinfo_txt_left {
+  text-align: left;
+}

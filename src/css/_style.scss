@@ -1,0 +1,90 @@
+@use "./_theme.scss";
+@use "./_common.scss" as common;
+
+.calendar {
+  @include common.size(90%, 800px);
+  margin: auto;
+
+  .header {
+    @include common.size(100%, 7%);
+    @include common.flex-row(center, baseline);
+    font-size: 30px;
+    .col.col-start {
+      @include common.size(100%, 80%);
+      @include common.flex-column(center);
+      .text {
+        .left_arrow {
+          margin-right: 10px;
+        }
+        .right_arrow {
+          margin-left: 10px;
+        }
+      }
+      svg {
+        color: transparentize(#ffc000, 0);
+        &:hover {
+          @include common.hover-event();
+          transform: scale(1.15);
+          color: theme.$white-color;
+        }
+      }
+    }
+  }
+  .days {
+    @include common.size(100%, fit-content);
+    @include common.flex-row(space-between, center);
+    font-weight: 700;
+    font-size: 20px;
+    padding: 0px;
+    color: theme.$black-color;
+    .col {
+      @include common.size(12.8%, 20px);
+      @include common.flex-column(flex-end, flex-start);
+      padding-left: 1%;
+      background: transparentize(theme.$step-color, 0);
+      border-radius: 10px;
+    }
+  }
+  .body {
+    @include common.size(100%, 90%);
+    @include common.flex-column();
+    .row {
+      @include common.size(100%, 90%);
+      @include common.flex-row(space-between, center);
+      .col {
+        @include common.size(12.5%, 90%);
+        @include common.flex-row(flex-start, flex-start);
+
+        border: 0.4px solid transparentize(white, 0.75);
+        border-radius: 10px;
+        font-size: 16px;
+        span {
+          margin: 4px 0 0 4px;
+        }
+        .not-valid {
+          color: theme.$gray-color;
+        }
+        img {
+          opacity: 0.1;
+        }
+      }
+      .col.cell.valid {
+        &:hover {
+          @include common.hover-event();
+          @include common.shadow(1.5px, theme.$white-color, 0.1);
+          transform: scale(1.01);
+          border: none;
+          background: transparentize(theme.$gray-color, 0.7);
+        }
+      }
+      .col.cell.selected {
+        @include common.shadow(1.5px, theme.$main-color, 0.1);
+        transform: scale(1.02);
+        border: none;
+        background: theme.$sub-color;
+        color: theme.$main-color;
+        font-weight: 600;
+      }
+    }
+  }
+}

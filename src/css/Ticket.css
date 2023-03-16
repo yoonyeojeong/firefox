@@ -1,0 +1,121 @@
+.ticket_page {
+  text-align: center;
+}
+
+.ticket_page > h1 {
+  font-size: 150px;
+  margin-top: 100px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-style: italic;
+}
+.anounce_ment {
+  color: rgb(255, 192, 0);
+  margin: 20px;
+  font-size: 25px;
+}
+
+.ticket_title {
+  font-size: 30px;
+  text-align: left;
+  height: 50px;
+  color: rgb(255, 192, 0);
+  font-weight: bold;
+}
+.reservation {
+  width: 400px;
+  height: 80px;
+  margin: 50px;
+  background-color: rgb(255, 192, 0);
+  border-radius: 40px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.reservation:hover {
+  color: rgb(30, 30, 30);
+}
+
+.reserve_table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+  height: 100px;
+}
+.fee_normal_table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1200px;
+  vertical-align: middle;
+}
+
+.reserve_td,
+.reserve_th,
+.fee_normal_td,
+.fee_normal_th,
+.fee_special,
+.fee_special_line_none {
+  height: 40px;
+  vertical-align: middle;
+  border-bottom: 2px solid #444444;
+  border-left: 2px solid #444444;
+  padding: 10px;
+}
+
+.reserve_td:first-child,
+.reserve_th:first-child,
+#left-line-none-th,
+#left-line-none-td,
+.fee_special_line_none {
+  border-left: none;
+}
+
+.reserve_tr,
+.fee_normal_tr {
+  color: white;
+  font-size: 20px;
+}
+.reserve_th,
+.fee_normal_th {
+  background-color: #555555;
+}
+
+.reserve_td {
+  height: 80px;
+}
+
+.reserve_place {
+  margin: 40px;
+}
+
+.ticket_text_left {
+  text-align: left;
+  height: 33px;
+}
+.ticket_text_left > th {
+  font-size: 25px;
+}
+.ticket_text_left > td {
+  font-size: 23px;
+}
+
+.reserve_place {
+  margin: 60px;
+}
+
+#fee_normal_etc_1,
+#fee_normal_etc_2 {
+  text-align: left;
+}
+
+.reserve_title_explain {
+  text-align: right;
+  vertical-align: middle;
+}
+.league_fee_normal {
+  margin: 50px;
+}
+
+.ticket_reserve {
+  margin-bottom: 40px;
+}

@@ -1,0 +1,51 @@
+.txt_box {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+}
+
+.txt_margin_bt {
+  margin-bottom: 100px;
+}
+
+.txt_margin {
+  margin-bottom: 50px;
+}
+
+.strong {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.aboutTeam > h1 {
+  font-size: 60px;
+  margin-top: 50px;
+  margin-left: 120px;
+}
+
+.logo_center {
+  text-align: center;
+  position: flex;
+}
+
+#logo {
+  display: block;
+  margin: 0px auto;
+  margin-bottom: 50px;
+  height: 300px;
+}
+
+.strong {
+  font-weight: normal;
+}
+
+.txt_kosmo {
+  color: #808080;
+
+  font-size: 14px;
+  line-height: 1.57;
+}
+.txt_kosmo_bold {
+  font-weight: bold;
+}

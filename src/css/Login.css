@@ -1,0 +1,134 @@
+.wrapper {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 420px;
+  height: 550px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.9);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+.login_title {
+  padding-top: 55px;
+  color: white;
+  font-weight: bold;
+  padding-bottom: 25px;
+}
+
+.wrapper > h4 {
+  color: #808080;
+  font-weight: bold;
+}
+
+.login_form {
+  text-align: left;
+  width: 320px;
+  height: 35px;
+  border: none;
+  border-bottom: solid 3px black;
+  background: white;
+}
+#save_id {
+  background-color: #444444;
+  height: 15px;
+  width: 15px;
+  margin-right: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#save_id:checked {
+  background: rgb(255, 192, 0);
+  border: none;
+}
+
+input::placeholder {
+  font-size: 10px;
+}
+
+.user_id {
+  position: flex;
+  margin-top: 20px;
+  padding-top: 19px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.user_id > p {
+  margin-left: 50px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.user_pw {
+  position: flex;
+  padding-top: 22px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.user_pw > p {
+  margin-left: 50px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.div_button {
+  margin: 20px;
+  position: flex;
+}
+
+.button1 {
+  width: 320px;
+  margin-top: 35px;
+  margin-bottom: 10px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #444444;
+}
+
+.button2 {
+  font-size: 13px;
+  font-weight: bold;
+  vertical-align: middle;
+  height: 15px;
+  text-decoration: underline;
+  color: rgb(255, 192, 0);
+}
+
+.div_button1 :hover {
+  background: rgb(255, 192, 0);
+  color: black;
+}
+
+.login_txt_left {
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 50px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.login_txt_left > span {
+  vertical-align: middle;
+}
+.joinus_button {
+  margin: 5px;
+}
+
+.login_txt_q {
+  color: #808080;
+  font-size: 13px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+.login_find {
+  color: #808080;
+  font-size: 12px;
+}

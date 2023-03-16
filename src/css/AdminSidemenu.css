@@ -1,0 +1,13 @@
+.admin_sidemenu {
+  text-align: left;
+  margin: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.admin_sidemenu_option {
+  height: 40px;
+}
+.admin_sidemenu_option:hover {
+  color: rgb(255, 192, 0);
+}

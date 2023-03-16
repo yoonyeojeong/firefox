@@ -1,0 +1,92 @@
+/* visual */
+.visual {
+  display: block;
+  position: relative;
+  height: 1080px;
+}
+.visual:after {
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 485px;
+  background: linear-gradient(to top, #000, transparent);
+}
+.visual p {
+  overflow: hidden;
+  position: absolute;
+  top: calc(50% - 65px);
+  left: calc(50% - 420px);
+  width: 841px;
+  height: 0;
+  animation: show_slogan 0.2s 1 ease-in normal;
+  animation-fill-mode: forwards;
+}
+.visual p:nth-child(1) {
+  z-index: 10;
+}
+.visual p.visible {
+  overflow: visible;
+}
+.visual p img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.visual p img:nth-child(1) {
+  display: none;
+}
+.visual p:nth-child(1) img:nth-child(1) {
+  display: block;
+  z-index: 10 !important;
+}
+.visual p + p {
+  opacity: 0.7;
+}
+.visual > p:nth-child(1) {
+  animation-delay: 4.9s;
+}
+.visual > p:nth-child(2) {
+  animation-delay: 4.7s;
+  z-index: 9;
+}
+.visual > p:nth-child(3) {
+  animation-delay: 4.5s;
+  z-index: 8;
+}
+.video_wrap {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1080px;
+}
+.visual_video {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 960px);
+  width: 1920px;
+  height: 1080px;
+}
+
+.visual.mobile_only p {
+  top: 230px;
+  left: calc(50% - 180px);
+  width: 360px;
+}
+.visual.mobile_only p img {
+  width: 360px;
+}
+
+@keyframes show_slogan {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 130px;
+  }
+}

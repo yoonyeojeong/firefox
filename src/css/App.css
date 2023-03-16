@@ -1,0 +1,11 @@
+.mypage_layout {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.admin_layout {
+  display: flex;
+  flex-direction: row;
+}

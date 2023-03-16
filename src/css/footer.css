@@ -1,0 +1,196 @@
+#footer {
+  position: relative;
+  height: 230px;
+  padding: 40px 40px 40px 90px;
+  background: rgba(0, 0, 0, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 1;
+}
+#footer h1 a {
+  font-size: 30px;
+  line-height: 22px;
+}
+#footer .topBtn {
+  display: block;
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  height: 20px;
+  font-size: 15px;
+  line-height: 20px;
+  padding-left: 25px;
+  background: url("../images/common/btn_top.png") no-repeat 0 50%;
+  background-size: 20px 20px;
+}
+
+#footer .f_info {
+  margin-top: 25px;
+}
+#footer .f_info ul {
+  font-size: 0;
+}
+#footer .f_info ul + ul {
+  margin-top: 12px;
+}
+#footer .f_info ul li {
+  display: inline-block;
+  position: relative;
+  font-size: 14px;
+  color: #808080;
+  line-height: 1;
+  padding-right: 12px;
+}
+#footer .f_info ul li + li {
+  padding: 0 12px;
+}
+#footer .f_info ul li + li:before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: calc(50% - 8px);
+  left: 0;
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.15);
+}
+#footer .f_info ul li b {
+  font-weight: normal;
+}
+
+#footer .f_link > a {
+  display: block;
+  position: absolute;
+  bottom: 82px;
+  right: 60px;
+  line-height: 40px;
+  padding-right: 100px;
+  border-bottom: 1px solid #707070;
+}
+#footer .f_link > a i {
+  display: block;
+  position: absolute;
+  top: calc(50% - 7px);
+  right: 0;
+  width: 15px;
+  height: 15px;
+}
+#footer .f_link > a i:before,
+#footer .f_link > a i:after {
+  display: block;
+  content: "";
+  position: absolute;
+  background: #707070;
+}
+#footer .f_link > a i:after {
+  top: 0;
+  right: 7px;
+  width: 1px;
+  height: 15px;
+}
+#footer .f_link > a i:before {
+  top: calc(50% - 1px);
+  right: 0;
+  width: 15px;
+  height: 1px;
+}
+#footer .f_link > a.active {
+  color: rgb(255, 192, 0);
+  border-color: rgb(255, 192, 0);
+}
+#footer .f_link > a.active i:before,
+#footer .f_link > a.active i:after {
+  background: rgb(255, 192, 0);
+}
+#footer .f_link .link_detail {
+  display: none;
+  position: absolute;
+  bottom: 230px;
+  left: 0;
+  width: 100%;
+  font-size: 0;
+  text-align: center;
+  background: #111;
+}
+#footer .f_link .link_detail .link_detail_obj {
+  display: inline-block;
+  width: 815px;
+  font-size: 16px;
+  text-align: left;
+  padding: 80px 0;
+  margin: 0 16px;
+}
+#footer .f_link .link_detail .link_detail_obj + .link_detail_obj {
+  width: 180px;
+}
+#footer .f_link .link_detail .link_detail_obj strong {
+  display: block;
+  font-weight: normal;
+  line-height: 1;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #808080;
+}
+#footer .f_link .link_detail .link_detail_obj ul {
+  font-size: 0;
+  padding-top: 15px;
+}
+#footer .f_link .link_detail .link_detail_obj ul li {
+  display: inline-block;
+  width: 203px;
+  font-size: 16px;
+  line-height: 1;
+  padding: 8px 0;
+}
+#footer .f_link .link_detail .link_detail_obj ul + ul li {
+  width: 100%;
+}
+#footer .f_link .link_detail .link_detail_obj ul li a {
+  color: #fff;
+  opacity: 0.5;
+}
+#footer .f_link .link_detail .link_detail_obj ul li a:focus,
+#footer .f_link .link_detail .link_detail_obj ul li a:hover {
+  color: rgb(255, 192, 0);
+  opacity: 1;
+}
+
+#footer .f_menu {
+  position: absolute;
+  bottom: 40px;
+  left: 90px;
+}
+#footer .f_menu ul {
+  display: flex;
+}
+#footer .f_menu ul li {
+  padding-right: 35px;
+}
+#footer .f_menu ul li a {
+  font-size: 14px;
+  color: #888;
+}
+#footer .f_menu ul li.point a {
+  color: #fff;
+}
+#footer .f_menu ul li a:focus,
+#footer .f_menu ul li a:hover {
+  color: rgb(255, 192, 0);
+}
+
+#footer .copyright {
+  position: absolute;
+  bottom: 40px;
+  right: 59px;
+  font-size: 16px;
+  color: #888;
+}
+#footer .copyright span {
+  font-size: 14px;
+}
+
+.img100 {
+  width: 100%;
+}
+
+#style_1 {
+  cursor: pointer;
+}

@@ -1,0 +1,14 @@
+.subtotal {
+  display: flex;
+}
+.total_price_anounce {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.total_price_color {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(255, 192, 0);
+}

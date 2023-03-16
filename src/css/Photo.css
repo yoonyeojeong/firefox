@@ -1,0 +1,36 @@
+.photozone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 10px;
+  padding: 20px;
+  width: 100%;
+}
+
+#slider {
+  overflow: hidden;
+  position: relative;
+  width: 1920px;
+  height: 400px;
+}
+.image-box {
+  width: 2500px;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  animation: bannermove 15s linear infinite;
+}
+.img {
+  height: 380px;
+  margin: 10px;
+  border: 1px solid black;
+}
+@keyframes bannermove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
