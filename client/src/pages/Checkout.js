@@ -3,7 +3,7 @@ import "../css/common.css";
 import "../css/reset.css";
 import "../css/Checkout.css";
 import "../css/main.css";
-import Subtotal from "./Subtotal";
+import Subtotal from "../components/Subtotal";
 import { BsCart4 } from "react-icons/bs";
 import { useStateValue } from "../components/StateProvider";
 import CheckoutProduct from "./CheckoutProduct";

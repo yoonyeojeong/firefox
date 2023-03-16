@@ -3,7 +3,7 @@ import "../css/common.css";
 import "../css/reset.css";
 import "../css/Product.css";
 import "../css/main.css";
-import { useStateValue } from "../components/StateProvider";
+import { useStateValue } from "./StateProvider";
 
 function Product({ num, name, category, price, goods_img }) {
   const [{ basket }, dispatch] = useStateValue();

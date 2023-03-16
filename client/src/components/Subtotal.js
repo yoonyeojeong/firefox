@@ -3,15 +3,14 @@ import "../css/common.css";
 import "../css/reset.css";
 import "../css/Subtotal.css";
 import "../css/main.css";
-import CurrencyFormat from "react-currency-format";
-import { useStateValue } from "../components/StateProvider";
-import { getBasketTotal } from "../components/Reducer";
+import { useStateValue } from "./StateProvider";
+import { getBasketTotal } from "./Reducer";
 
 function Subtotal() {
   const [{ basket }, dispatch] = useStateValue();
   return (
     <div className="subtotal">
-      <CurrencyFormat
+      {/*<CurrencyFormat
         renderText={(value) => (
           <>
             <div className="total_price_anounce">
@@ -23,7 +22,7 @@ function Subtotal() {
         value={getBasketTotal(basket)}
         displayType={"text"}
         thousandSeparator={true}
-      />
+      />*/}
     </div>
   );
 }
