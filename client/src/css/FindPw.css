@@ -1,0 +1,105 @@
+.findpw {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  width: 500px;
+  height: 580px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.9);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+.findpw_title {
+  padding-top: 55px;
+  color: white;
+  font-weight: bold;
+  padding-bottom: 25px;
+}
+
+.findpw > h4 {
+  color: #808080;
+  font-weight: bold;
+}
+
+.findpw_form {
+  text-align: left;
+  width: 320px;
+  height: 35px;
+  border: none;
+  border-bottom: solid 3px black;
+  background: white;
+  border-radius: 8px;
+}
+.findpw_user_bd > ul {
+  text-align: left;
+  margin-left: 90px;
+  margin-top: 10px;
+}
+
+.findpw_radio {
+  appearance: auto;
+  display: inline;
+}
+
+input::placeholder {
+  font-size: 10px;
+}
+
+.findpw_user_id > p,
+.findpw_user_name > p,
+.findpw_user_num > p {
+  margin-left: 91px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.findpw_user_id,
+.findpw_user_name,
+.findpw_user_num {
+  position: flex;
+  padding-top: 22px;
+  color: #808080;
+  font-size: 12px;
+}
+
+.findpw_button1 {
+  width: 320px;
+  margin-top: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #444444;
+}
+
+.findpw_button2 {
+  font-size: 13px;
+  font-weight: bold;
+  vertical-align: middle;
+  height: 15px;
+  text-decoration: underline;
+  color: rgb(255, 192, 0);
+}
+
+.div_button1 :hover {
+  background: rgb(255, 192, 0);
+  color: black;
+}
+
+.findpw_button {
+  margin: 5px;
+}
+
+.findpw_txt_q {
+  color: #808080;
+  font-size: 13px;
+  height: 15px;
+  vertical-align: middle;
+}
+
+.findpw_form_num {
+  width: 95px;
+  height: 35px;
+  border-radius: 8px;
+}

@@ -124,7 +124,7 @@ function JoinUs() {
         <span className="login_txt_q">
           로그인 화면으로 돌아가고 싶으신가요?&nbsp;&nbsp;&nbsp;
         </span>
-        <Link to="/joinus">
+        <Link to="/login">
           <button className="button2" type="button">
             LOGIN
           </button>
