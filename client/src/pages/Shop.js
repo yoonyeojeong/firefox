@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/Shop.css";
-import "../css/main.css";
 import Product from "../components/Product";
 import { FaSearch } from "react-icons/fa";
 import useFetch from "../hooks/useFetch";

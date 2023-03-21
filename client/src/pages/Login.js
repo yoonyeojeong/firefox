@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/Login.css";
-import "../css/main.css";
 import { useState } from "react";
 import { auth } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";

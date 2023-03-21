@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/AboutTeam.css";
-import "../css/main.css";
 import logo from "../images/common/teamLogo.png";
 
 function AboutTeam() {

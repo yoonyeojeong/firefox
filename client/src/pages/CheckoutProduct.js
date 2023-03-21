@@ -1,7 +1,4 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
-import "../css/main.css";
 import "../css/CheckoutProduct.css";
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import { useStateValue } from "../components/StateProvider";

@@ -1,8 +1,20 @@
-.admin_goods {
-  background-color: #ff0000;
-}
 .admin_goods_list {
-  margin: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+}
+.goods_regist_td > input,
+.goods_regist_td > span > input {
+  margin-left: 20px;
+  margin-bottom: 30px;
+  width: 240px;
+}
+.goods_regist_td > select {
+  margin-left: 20px;
+  margin-bottom: 30px;
+  width: 240px;
+  height: 22px;
+  vertical-align: middle;
 }
 
 .goods_list_button {
@@ -14,29 +26,21 @@
   font-weight: bold;
 }
 .goods_regist {
+  width: 450px;
   margin: 30px;
   background-color: #111111;
   border-radius: 10px;
   padding: 20px;
-}
-.goods_regist > table > tr > td {
-  vertical-align: middle;
-  height: 40px;
-  padding: 5px;
-}
-.goods_regist > table > tr > td > input {
-  height: 25px;
-}
-.goods_regist > table > tr > td > select {
-  font-size: 15px;
-  height: 25px;
+  padding-left: 50px;
 }
 
 .admin_goods_regist_button {
   background-color: rgb(255, 192, 0);
   color: #111111;
   font-size: 20px;
-  padding: 5px;
+  padding: 6px;
+  width: 150px;
+  margin-bottom: 20px;
   border-radius: 4px;
   font-weight: bold;
 }
@@ -44,18 +48,21 @@
   text-align: right;
 }
 .goods_regist > p {
-  margin: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
 }
+
 .admin_goods_won {
   text-align: left;
 }
 .admin_goods_input_txt {
   padding-left: 8px;
 }
-.admin_goods_list_table {
-  margin: 20px;
-}
+
 .admin_goods_list_table > tr > th {
   background-color: rgb(255, 192, 0);
   color: #111111;
@@ -64,6 +71,20 @@
 .admin_goods_list_table > tr > td {
   border: solid 1px rgb(255, 192, 0);
   font-size: 20px;
-  padding: 5px;
   text-align: center;
+}
+
+.admin_goods_list_table_1 > th {
+  font-size: 25px;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(255, 192, 0);
+  width: 250px;
+  height: 70px;
+}
+
+.admin_goods_list_table_td {
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
+  width: 250px;
 }

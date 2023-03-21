@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/Photo.css";
-import "../css/main.css";
 import photo_03 from "../images/photozone/photo_03.jpg";
 import photo_04 from "../images/photozone/photo_04.jpg";
 import photo_05 from "../images/photozone/photo_05.jpg";

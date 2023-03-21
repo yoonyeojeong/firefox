@@ -1,7 +1,4 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
-import "../css/main.css";
 import "../css/Sidemenu.css";
 import { NavLink } from "react-router-dom";
 

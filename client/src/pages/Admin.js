@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/Admin.css";
-import "../css/main.css";
 import { Link } from "react-router-dom";
 import AdminSidemenu from "./AdminSidemenu";
 function Admin() {

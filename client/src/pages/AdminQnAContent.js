@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/AdminQnAContent.css";
-import "../css/main.css";
 
 function AdminQnAContent({ qnd_id, user_id, nick_name }) {
   return (

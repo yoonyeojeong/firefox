@@ -1,25 +1,26 @@
 import React, { useState } from "react";
-import "../css/common.css";
-import "../css/reset.css";
-import "../css/main.css";
 import "../css/AdminGoods.css";
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import axios from "axios";
+import useFetch from "../hooks/useFetch";
 
 function AdminGoods() {
-  const [file, setFile] = useState(null);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [category, setCategory] = useState("");
-  const [goods_img, setGoods_img] = useState("");
+  const [goods] = useFetch("http://localhost:5000/api/product");
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+    category: "",
+    filename: "",
+    file: null,
+  });
 
   const addProduct = () => {
     const url = "/api/product";
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("price", price);
-    formData.append("category", category);
-    formData.append("goods_img", goods_img);
+    const newFormData = new FormData();
+    newFormData.append("name", formData.name);
+    newFormData.append("price", formData.price);
+    newFormData.append("category", formData.category);
+    newFormData.append("filename", formData.filename);
 
     const config = {
       headers: {
@@ -27,124 +28,141 @@ function AdminGoods() {
       },
     };
 
-    return axios.post(url, formData, config);
+    return axios.post(url, newFormData, config);
   };
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    addProduct().then((response) => {
-      console.log(response.data);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    setFormData({
+      ...formData,
+      file: e.target.files[0],
+      filename: e.target.value,
     });
-    setName("");
-    setPrice(0);
-    setFile(null);
-    setCategory("");
-    setGoods_img("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addProduct().then((res) => {
+      console.log(res.data);
+    });
+    setFormData({
+      name: "",
+      price: "",
+      category: "",
+      filename: "",
+      file: null,
+    });
+    alert("상품이 등록되었습니다.");
     window.location.reload();
   };
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-    setGoods_img(e.target.value);
-  };
 
-  const onNameHandler = (e) => {
-    setName(e.target.value);
-  };
-
-  const onPricehandler = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const onCategoryHandler = (e) => {
-    setCategory(e.target.value);
-  };
   return (
-    <div clssName="admin_goods">
-      <form onSubmit={handleFormSubmit}>
+    <div className="admin_goods">
+      <form onSubmit={handleSubmit}>
         <div className="goods_regist">
           <p>상품등록하기</p>
           <table>
-            <tr>
-              <td>상품이름</td>
-              <td>
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={onNameHandler}
-                  className="admin_goods_input_txt"
-                />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>상품가격</td>
-              <td>
-                <input
-                  type="text"
-                  name="price"
-                  value={price}
-                  onChange={onPricehandler}
-                  className="admin_goods_input_txt"
-                />
-              </td>
-              <td className="admin_goods_won">원</td>
-            </tr>
-            <tr>
-              <td>카테고리</td>
-              <td>
-                <select name="category" onChange={onCategoryHandler} id="">
-                  <option value="유니폼">유니폼</option>
-                  <option value="모자">모자</option>
-                  <option value="의류">의류</option>
-                  <option value="잡화">잡화</option>
-                  <option value="기념상품">기념상품</option>
-                </select>
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>상품사진</td>
-              <td>
-                <input
-                  type="file"
-                  name="file"
-                  file={file}
-                  value={goods_img}
-                  onChange={handleFileChange}
-                />
-              </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td className="admin_goods_regist_button_right" colspan="3">
-                <button type="submit" className="admin_goods_regist_button">
-                  등록
-                </button>
-              </td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className="goods_regist_td">상품이름</td>
+                <td className="goods_regist_td">
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </td>
+                <td className="goods_regist_td"></td>
+              </tr>
+              <tr>
+                <td className="goods_regist_td">상품가격</td>
+                <td className="goods_regist_td">
+                  <input
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </td>
+                <td className="admin_goods_won">원</td>
+              </tr>
+              <tr>
+                <td className="goods_regist_td">카테고리</td>
+                <td className="goods_regist_td">
+                  <select
+                    name="category"
+                    id="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">선택하기</option>
+                    <option value="유니폼">유니폼</option>
+                    <option value="모자">모자</option>
+                    <option value="의류">의류</option>
+                    <option value="잡화">잡화</option>
+                    <option value="기념상품">기념상품</option>
+                  </select>
+                </td>
+                <td className="goods_regist_td"></td>
+              </tr>
+              <tr>
+                <td className="goods_regist_td">상품사진</td>
+                <td className="goods_regist_td">
+                  <input
+                    type="file"
+                    name="file"
+                    file={formData.file}
+                    value={formData.filename}
+                    onChange={handleImageChange}
+                  />
+                </td>
+                <td className="goods_regist_td"></td>
+              </tr>
+              <tr>
+                <td className="admin_goods_regist_button_right" colSpan="3">
+                  <button type="submit" className="admin_goods_regist_button">
+                    등록
+                  </button>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </form>
       <div className="admin_goods_list">
         <table className="admin_goods_list_table">
-          <tr>
-            <th>상품번호</th>
-            <th>상품이름</th>
-            <th>카테고리</th>
-            <th>상품가격</th>
-            <th>상품삭제</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>한화이글스 야구공</td>
-            <td>기념상품</td>
-            <td>10000</td>
-            <td>
-              <button>
-                <MdOutlineCancelPresentation />
-              </button>
-            </td>
-          </tr>
+          <tbody>
+            <tr className="admin_goods_list_table_1">
+              <th>상품번호</th>
+              <th>상품이름</th>
+              <th>카테고리</th>
+              <th>상품가격</th>
+              <th>상품삭제</th>
+            </tr>
+
+            {goods &&
+              goods.map((p) => {
+                return (
+                  <tr>
+                    <td className="admin_goods_list_table_td">{p.num}</td>
+                    <td className="admin_goods_list_table_td">{p.NAME}</td>
+                    <td className="admin_goods_list_table_td">{p.category}</td>
+                    <td className="admin_goods_list_table_td">{p.price}</td>
+                    <td className="admin_goods_list_table_td">
+                      <button>
+                        <MdOutlineCancelPresentation />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
         </table>
       </div>
     </div>

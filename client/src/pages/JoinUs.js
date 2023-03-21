@@ -1,7 +1,4 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
-import "../css/main.css";
 import "../css/JoinUs.css";
 import { Link } from "react-router-dom";
 
@@ -124,7 +121,7 @@ function JoinUs() {
         <span className="login_txt_q">
           로그인 화면으로 돌아가고 싶으신가요?&nbsp;&nbsp;&nbsp;
         </span>
-        <Link to="/login">
+        <Link to="/joinus">
           <button className="button2" type="button">
             LOGIN
           </button>

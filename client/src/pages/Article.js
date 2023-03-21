@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/article.css";
-import "../css/main.css";
 import slogan_main from "../images/main/img_slogan_main.png";
 import tempImg from "../images/temp.jpg";
 import Photo from "./Photo";

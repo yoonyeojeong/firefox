@@ -1,0 +1,44 @@
+.aboutCompany_width {
+  min-width: 1920px;
+}
+#aboutcompany_title {
+  margin-left: 150px;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  font-size: 60px;
+  line-height: 80px;
+  font-weight: bold;
+}
+.aboutcompany_div1 {
+  margin-left: 150px;
+  margin-bottom: 80px;
+  display: inline-block;
+}
+
+.aboutcompany_div2 {
+  margin-left: 30px;
+  margin-bottom: 120px;
+  display: inline-block;
+}
+.aboutcompany_th {
+  font-size: 13px;
+  height: 50px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.685);
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+}
+
+.aboutcompany_tr {
+  color: white;
+  font-size: 20px;
+  text-align: left;
+}
+
+.aboutcompany_td {
+  font-size: 15px;
+  height: 30px;
+  width: 200px;
+  padding-top: 20px;
+  color: #808080;
+}

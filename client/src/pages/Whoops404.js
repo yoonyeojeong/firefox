@@ -1,7 +1,4 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
-import "../css/main.css";
 import "../css/Whoops404.css";
 import { useNavigate } from "react-router-dom";
 

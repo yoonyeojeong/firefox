@@ -1,8 +1,5 @@
 import React from "react";
-import "../css/common.css";
-import "../css/reset.css";
 import "../css/MyInfo.css";
-import "../css/main.css";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../components/StateProvider";
 import { auth } from "../firebase";
