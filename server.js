@@ -57,4 +57,12 @@ app.post("/api/product", upload.single("image"), (req, res) => {
   });
 });
 
+app.delete("/api/product/:num", (req, res) => {
+  const sql = "DELETE FROM products WHERE num=?";
+  const params = [req.params.num];
+  connection.query(sql, params, (err, rows, fields) => {
+    res.send(rows);
+  });
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));

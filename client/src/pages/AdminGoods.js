@@ -44,19 +44,36 @@ function AdminGoods() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    addProduct().then((res) => {
-      console.log(res.data);
-    });
-    setFormData({
-      name: "",
-      price: "",
-      category: "",
-      filename: "",
-      file: null,
-    });
-    alert("상품이 등록되었습니다.");
-    window.location.reload();
+    if (window.confirm("등록하시겠습니까?")) {
+      e.preventDefault();
+      addProduct().then((res) => {
+        console.log(res.data);
+      });
+      setFormData({
+        name: "",
+        price: "",
+        category: "",
+        filename: "",
+        file: null,
+      });
+      alert("상품이 등록되었습니다.");
+      window.location.reload();
+    } else {
+      alert("상품등록을 취소하였습니다.");
+    }
+  };
+
+  const deleteProduct = (num) => {
+    if (window.confirm("삭제하시겠습니까?")) {
+      const url = "/api/product/" + num;
+      fetch(url, {
+        method: "DELETE",
+      });
+      alert("삭제되었습니다.");
+      window.location.reload();
+    } else {
+      alert("취소하였습니다.");
+    }
   };
 
   return (
@@ -155,7 +172,7 @@ function AdminGoods() {
                     <td className="admin_goods_list_table_td">{p.category}</td>
                     <td className="admin_goods_list_table_td">{p.price}</td>
                     <td className="admin_goods_list_table_td">
-                      <button>
+                      <button onClick={(e) => deleteProduct(p.num)}>
                         <MdOutlineCancelPresentation />
                       </button>
                     </td>
