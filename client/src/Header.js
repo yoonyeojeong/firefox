@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./css/Header.css";
 import "./css/reset.css";
 import "./css/common.css";
 import "./css/main.css";
 import live from "./images/common/Live.png";
-import { Link, NavLink } from "react-router-dom";
-import { auth } from "./firebase";
-import { useStateValue } from "./components/StateProvider";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import useFetch from "./hooks/useFetch";
+import axios from "axios";
 
 function Header() {
-  const [{ user }, dispatch] = useStateValue();
-  console.log("Header.js의 user = " + user);
+  const [user] = useFetch("http://localhost:5000/api/users");
+  const [checkUser, setCheckUser] = useState(false);
+  const navigate = useNavigate();
 
-  const handleAuthentication = () => {
-    console.log("Header.js의 user(handle) = " + user);
+  useEffect(() => {
     if (user) {
-      auth.signOut();
+      const isLoggedIn = user.some((u) => u.isLogin === 1);
+      setCheckUser(isLoggedIn);
+    }
+  }, [user]);
+
+  const logoutFunction = () => {
+    if (checkUser) {
+      const url = "/api/logout/";
+      navigate("/");
+      window.location.reload();
+      setCheckUser(false);
+      axios.post(url);
     }
   };
 
@@ -140,7 +151,7 @@ function Header() {
                   >
                     <span></span>
                     <span className="width"></span>LIVE
-                    <img className="header_live" src={live} width="45" />
+                    <img className="header_live" src={live} width="45" alt="" />
                   </Link>
                 </li>
               </ul>
@@ -149,15 +160,15 @@ function Header() {
             <div className="util_menu">
               <ul>
                 <li>
-                  <Link to={!user && "/login"}>
-                    <span onClick={handleAuthentication}>
-                      {user ? "LOGOUT" : "LOGIN"}
+                  <Link to={!checkUser && "/login"}>
+                    <span onClick={logoutFunction}>
+                      {checkUser ? "LOGOUT" : "LOGIN"}
                     </span>
                   </Link>
                 </li>
                 <li>
-                  <Link to={user ? "/mypage/checkout" : "/joinus"}>
-                    <span> {user ? "MY PAGE" : "JOIN US"}</span>
+                  <Link to={checkUser ? "/mypage/checkout" : "/joinus"}>
+                    <span> {checkUser ? "MY PAGE" : "JOIN US"}</span>
                   </Link>
                 </li>
               </ul>

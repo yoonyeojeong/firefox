@@ -1,8 +1,18 @@
 import React from "react";
 import "../css/AdminSidemenu.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function AdminSidemenu() {
+  const navigate = useNavigate();
+
+  const logoutFunction = () => {
+    const url = "/api/logout/";
+    navigate("/");
+    axios.post(url);
+    window.location.reload();
+  };
+
   return (
     <div className="admin_sidemenu">
       <NavLink
@@ -56,6 +66,7 @@ function AdminSidemenu() {
       <NavLink
         to="/"
         style={({ isActive }) => ({ color: isActive ? "rgb(255,192,0" : "" })}
+        onClick={logoutFunction}
       >
         <div className="admin_sidemenu_option">로그아웃</div>
       </NavLink>

@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "date-fns": "^2.29.3",
     "firebase": "^9.17.2",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
@@ -42,6 +43,5 @@
   "devDependencies": {
     "@iconify/react": "^4.1.0",
     "sass": "^1.59.3"
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }

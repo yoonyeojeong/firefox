@@ -37,36 +37,29 @@ import Whoops404 from "./pages/Whoops404";
 import "./css/reset.css";
 import "./css/common.css";
 import "./css/main.css";
-import { useEffect } from "react";
-import { useStateValue } from "./components/StateProvider";
-import { auth } from "./firebase";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import useFetch from "./hooks/useFetch";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [user] = useFetch("http://localhost:5000/api/users");
+  const [checkUser, setCheckUser] = useState();
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      console.log("Current User : ", user);
+    if (user) {
+      const isLoggedIn = user.some((u) => u.isLogin === 1);
+      setCheckUser(isLoggedIn);
+    } else {
+      setCheckUser(0);
+    }
+  }, [user]);
 
-      // 로그인 상태라면
-      if (authUser) {
-        console.log("authUser있음 실행");
-        dispatch({
-          type: "SET_USER",
-          user: authUser,
-        });
-      }
-      // 로그인상태가 아니라면
-      else {
-        console.log("authUser없음 실행");
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-      }
-      console.log("dispatch.user = " + user);
-    });
+  const isAdmin = useMemo(() => {
+    if (user && user[0].isLogin === 1) {
+      return true;
+    } else {
+      return false;
+    }
   }, [user]);
 
   return (
@@ -329,7 +322,7 @@ function App() {
           <Route
             path="/mypage/checkout"
             element={
-              user ? (
+              checkUser ? (
                 <>
                   <Header />
                   <div className="mypage_layout">
@@ -352,7 +345,7 @@ function App() {
           <Route
             path="/admin/qna"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminQnA />
@@ -360,7 +353,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -371,7 +364,7 @@ function App() {
           <Route
             path="/admin/players"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminPlayers />
@@ -379,7 +372,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -390,7 +383,7 @@ function App() {
           <Route
             path="/admin/schedule"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminSchedule />
@@ -398,7 +391,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -409,7 +402,7 @@ function App() {
           <Route
             path="/admin/goods"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminGoods />
@@ -417,7 +410,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -428,7 +421,7 @@ function App() {
           <Route
             path="/admin/user"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminUser />
@@ -436,7 +429,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -447,7 +440,7 @@ function App() {
           <Route
             path="/admin/notice"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminNotice />
@@ -455,7 +448,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -466,7 +459,7 @@ function App() {
           <Route
             path="/admin/board"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminBoard />
@@ -474,7 +467,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
@@ -485,7 +478,7 @@ function App() {
           <Route
             path="/admin/photo"
             element={
-              user ? (
+              isAdmin ? (
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminPhoto />
@@ -493,7 +486,7 @@ function App() {
               ) : (
                 <>
                   <Header />
-                  <NeedLogin />
+                  <Whoops404 />
                   <Footer />
                 </>
               )
