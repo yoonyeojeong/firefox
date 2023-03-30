@@ -12,10 +12,20 @@ import MinorPlayers from "./pages/Minor_players";
 import Major from "./pages/Major";
 import Minor from "./pages/Minor";
 import Notice from "./pages/Notice";
+import NoticeDetail from "./pages/NoticeDetail";
 import Board from "./pages/Board";
+import BoardPost from "./pages/BoardPost";
+import BoardContents from "./pages/BoardContents";
+import BoardSearch from "./pages/BoardSearch";
 import Gallery from "./pages/Gallery";
 import Shop from "./pages/Shop";
+import ProductDetail from "./components/Productdetail";
 import Ticket from "./pages/Ticket";
+import Payment from "./ticketPay/Payment/Pages/RadyPayment";
+import Ticketing from "../src/pages/Ticketing";
+import QnA from "./pages/QnA";
+import MyQnA from "./pages/MyQnA";
+import MyQnAContents from "./pages/MyQnAContents";
 import Login from "./pages/Login";
 import JoinUs from "./pages/JoinUs";
 import FindId from "./pages/FindId";
@@ -26,41 +36,30 @@ import Checkout from "./pages/Checkout";
 import Sidemenu from "./pages/Sidemenu";
 import AdminSidemenu from "./pages/AdminSidemenu";
 import AdminQnA from "./pages/AdminQnA";
+import AdminQnAContent from "./pages/AdminQnAContent";
 import AdminPlayers from "./pages/AdminPlayers";
 import AdminSchedule from "./pages/AdminSchedule";
 import AdminGoods from "./pages/AdminGoods";
 import AdminUser from "./pages/AdminUser";
 import AdminNotice from "./pages/AdminNotice";
+import AdminNoticeDetail from "./pages/AdminNoticeDetail";
 import AdminBoard from "./pages/AdminBoard";
 import AdminPhoto from "./pages/AdminPhoto";
 import Whoops404 from "./pages/Whoops404";
 import "./css/reset.css";
 import "./css/common.css";
 import "./css/main.css";
-import { useEffect, useState, useMemo } from "react";
-import useFetch from "./hooks/useFetch";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [user] = useFetch("http://localhost:5000/api/users");
-  const [checkUser, setCheckUser] = useState();
+  const token = useSelector((state) => state.Auth.token);
+  console.log("app.js token : ", token);
 
-  useEffect(() => {
-    if (user) {
-      const isLoggedIn = user.some((u) => u.isLogin === 1);
-      setCheckUser(isLoggedIn);
-    } else {
-      setCheckUser(0);
-    }
-  }, [user]);
-
-  const isAdmin = useMemo(() => {
-    if (user && user[0].isLogin === 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [user]);
+  const [user, setUser] = useState();
+  const [isAdmin, setIsAdmin] = useState(); // 관리자 페이지 들어가려면 useState(1)로 설정하고 테스트
+  const [isLogin, setIsLogin] = useState(); // 마이 페이지 들어가려면 useState(1)로 설정하고 테스트
 
   return (
     <BrowserRouter>
@@ -198,6 +197,18 @@ function App() {
             }
           ></Route>
 
+          {/* 공지사항 내용*/}
+          <Route
+            path="/fan/notice/:NUM"
+            element={
+              <>
+                <Header />
+                <NoticeDetail />
+                <Footer />
+              </>
+            }
+          ></Route>
+
           {/* 자유게시판 */}
           <Route
             path="/fan/board"
@@ -205,6 +216,42 @@ function App() {
               <>
                 <Header />
                 <Board />
+                <Footer />
+              </>
+            }
+          ></Route>
+
+          {/* 자유게시판 글찾기 */}
+          <Route
+            path="/fan/board/:option/:content"
+            element={
+              <>
+                <Header />
+                <BoardSearch />
+                <Footer />
+              </>
+            }
+          ></Route>
+
+          {/* 자유게시판 글쓰기 */}
+          <Route
+            path="/fan/board/post"
+            element={
+              <>
+                <Header />
+                <BoardPost />
+                <Footer />
+              </>
+            }
+          ></Route>
+
+          {/* 자유게시판 글 내용 */}
+          <Route
+            path="/fan/board/contents/:NUM"
+            element={
+              <>
+                <Header />
+                <BoardContents />
                 <Footer />
               </>
             }
@@ -233,6 +280,17 @@ function App() {
               </>
             }
           ></Route>
+          {/* 상품상세 */}
+          <Route
+            path="/shop/detail/:num"
+            element={
+              <>
+                <Header />
+                <ProductDetail />
+                <Footer />
+              </>
+            }
+          ></Route>
 
           {/* Ticket */}
           <Route
@@ -241,6 +299,29 @@ function App() {
               <>
                 <Header />
                 <Ticket />
+                <Footer />
+              </>
+            }
+          ></Route>
+
+          {/* Payment */}
+          <Route
+            path="/ticket/payment"
+            element={
+              <>
+                <Header />
+                <Payment />
+                <Footer />
+              </>
+            }
+          ></Route>
+          {/* Ticketing */}
+          <Route
+            path="/ticket/ticketing"
+            element={
+              <>
+                <Header />
+                <Ticketing />
                 <Footer />
               </>
             }
@@ -322,12 +403,35 @@ function App() {
           <Route
             path="/mypage/checkout"
             element={
-              checkUser ? (
+              isLogin ? (
                 <>
                   <Header />
                   <div className="mypage_layout">
                     <Sidemenu />
                     <Checkout />
+                  </div>
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Header />
+                  <NeedLogin />
+                  <Footer />
+                </>
+              )
+            }
+          ></Route>
+
+          {/* 회원 QnA 페이지 */}
+          <Route
+            path="/mypage/QnA"
+            element={
+              isLogin ? (
+                <>
+                  <Header />
+                  <div className="mypage_layout">
+                    <Sidemenu />
+                    <QnA />
                   </div>
                   <Footer />
                 </>
@@ -349,6 +453,70 @@ function App() {
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminQnA />
+                </div>
+              ) : (
+                <>
+                  <Header />
+                  <Whoops404 />
+                  <Footer />
+                </>
+              )
+            }
+          ></Route>
+
+          {/* 회원 MyQnA (상세) */}
+          <Route
+            path="/mypage/myQnA"
+            element={
+              isLogin ? (
+                <>
+                  <Header />
+                  <div className="mypage_layout">
+                    <Sidemenu />
+                    <MyQnA />
+                  </div>
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Header />
+                  <NeedLogin />
+                  <Footer />
+                </>
+              )
+            }
+          ></Route>
+
+          {/* 회원 MyQnA (답변확인페이지) */}
+          <Route
+            path="/mypage/myQnAcontents"
+            element={
+              isLogin ? (
+                <>
+                  <Header />
+                  <div className="mypage_layout">
+                    <Sidemenu />
+                    <MyQnAContents />
+                  </div>
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Header />
+                  <NeedLogin />
+                  <Footer />
+                </>
+              )
+            }
+          ></Route>
+          {/* AdminQnAContent */}
+          <Route
+            path="/admin/adminQnAcontent"
+            element={
+              isAdmin ? (
+                <div className="admin_layout">
+                  <AdminSidemenu />
+                  <AdminQnAContent />
                 </div>
               ) : (
                 <>
@@ -444,6 +612,25 @@ function App() {
                 <div className="admin_layout">
                   <AdminSidemenu />
                   <AdminNotice />
+                </div>
+              ) : (
+                <>
+                  <Header />
+                  <Whoops404 />
+                  <Footer />
+                </>
+              )
+            }
+          ></Route>
+
+          {/* AdminNoticeDetail (공지사항 수정시 내용) */}
+          <Route
+            path="/admin/notice/:NUM"
+            element={
+              isAdmin ? (
+                <div className="admin_layout">
+                  <AdminSidemenu />
+                  <AdminNoticeDetail />
                 </div>
               ) : (
                 <>

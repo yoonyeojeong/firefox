@@ -1,0 +1,40 @@
+/* Styles for Major_player components */
+.Major_player {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .major_num {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .major_num img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .major_num p {
+    margin: 0;
+  }
+  
+  /* Styles for Major_player_row */
+  .Major_player_row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .Major_player_row .major_num {
+    width: 30%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 10px;
+  }

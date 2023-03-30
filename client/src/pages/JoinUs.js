@@ -117,7 +117,7 @@ function JoinUs() {
         {formData.user_pw === confirm_pw && confirm_pw && formData.user_pw ? (
           <p className="temp1">비밀번호가 일치합니다</p>
         ) : (
-          <p className="temp1">비밀번호가 일치하지않습니다.</p>
+          <p className="temp2">비밀번호가 일치하지않습니다.</p>
         )}
         {/* 회원이름 */}
         <div className="join_us_user_name">

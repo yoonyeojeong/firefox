@@ -1,0 +1,99 @@
+.adminuser > h2 {
+  margin-top: 15px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.adminuser_box1,
+.adminuser_box2 {
+  width: 850px;
+  margin-top: 12px;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.432);
+}
+.adminuser_box_title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.adminuser_btn {
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(255, 192, 0);
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.admin_control1 {
+  font-size: 15px;
+  border-radius: 5px;
+  width: 500px;
+  height: 30px;
+  margin-right: 5px;
+  margin-top: 7px;
+}
+
+.adminuser_form > label > input {
+  width: 800px;
+}
+
+.adminuser_tatle {
+  text-align: center;
+  width: 800px;
+  border-bottom: 1px solid #666666;
+  margin-bottom: 20px;
+}
+
+.adminuser_tatle_tr > th {
+  font-size: 20px;
+  height: 40px;
+  vertical-align: middle;
+  border-bottom: 1px solid #666666;
+}
+
+.adminuser_tatle_tr > td {
+  font-size: 15px;
+  height: 30px;
+  vertical-align: middle;
+  border-bottom: 1px solid #666666;
+}
+
+.adminuser_form1 {
+  display: inline;
+}
+
+.admin_control2 {
+  margin-left: 3px;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.admin_control3 {
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 300px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.adminuser_tatle_tr :nth-child(1) {
+  width: 100px;
+}
+
+.adminuser_tatle_tr :nth-child(2) {
+  width: 200px;
+}
+
+.adminuser_tatle_tr :nth-child(3) {
+  width: 70px;
+}
+
+.adminuser_tatle_tr :nth-child(4) {
+  width: 200px;
+}

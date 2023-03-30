@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Shop.css";
 import Product from "../components/Product";
 import { FaSearch } from "react-icons/fa";
-import useFetch from "../hooks/useFetch";
+import axios from "axios";
 
 function Shop() {
-  const [goods] = useFetch("http://localhost:5000/api/product");
+  const [goods, setGoods] = useState([]);
+  let newList = [];
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/product").then((res) => {
+      setGoods(res.data);
+    });
+  }, []);
+
+  for (let i = 0; i < goods.length; i += 4) {
+    newList.push(goods.slice(i, i + 4));
+  }
+  const searchApi = (category) => {
+    //api 호출
+    axios
+      .get("http://localhost:5000/api/selectProduct?category=" + category)
+      .then((res) => {
+        setGoods(res.data);
+      });
+  };
 
   return (
     <div className="shop">
@@ -22,45 +40,82 @@ function Shop() {
         </div>
         <ul className="product_category_ul">
           <li className="product_category_li">
-            <button className="product_category_button"> 전 체</button>
+            <button
+              className="product_category_button"
+              id="all"
+              onClick={(e) => searchApi("")}
+            >
+              {" "}
+              전 체
+            </button>
           </li>
           <li className="product_category_li">
-            <button className="product_category_button"> 유니폼</button>
+            <button
+              className="product_category_button"
+              id="a"
+              onClick={(e) => searchApi("a")}
+            >
+              {" "}
+              유니폼
+            </button>
           </li>
           <li className="product_category_li">
-            <button className="product_category_button"> 모 자</button>
+            <button
+              className="product_category_button"
+              id="b"
+              onClick={(e) => searchApi("b")}
+            >
+              {" "}
+              모 자
+            </button>
           </li>
           <li className="product_category_li">
-            <button className="product_category_button"> 의 류</button>
+            <button
+              className="product_category_button"
+              id="c"
+              onClick={(e) => searchApi("c")}
+            >
+              {" "}
+              의 류
+            </button>
           </li>
           <li className="product_category_li">
-            <button className="product_category_button"> 잡 화</button>
+            <button
+              className="product_category_button"
+              id="d"
+              onClick={(e) => searchApi("d")}
+            >
+              {" "}
+              잡 화
+            </button>
           </li>
           <li className="product_category_li">
-            <button className="product_category_button"> 기념상품</button>
+            <button
+              className="product_category_button"
+              id="e"
+              onClick={(e) => searchApi("e")}
+            >
+              {" "}
+              기념상품
+            </button>
           </li>
         </ul>
       </div>
-      <div className="shop_row">
-        {goods &&
-          goods.map((p) => {
-            return (
-              <Product
-                key={p.num}
-                num={p.num}
-                name={p.name}
-                category={p.category}
-                price={p.price}
-                goods_img={p.goods_img}
-              />
-            );
-          })}
-      </div>
-      <div className="shop_row">
-        <Product />
-        <Product />
-        <Product />
-      </div>
+
+      {newList.map((row, rowIndex) => (
+        <div className="shop_row" key={rowIndex}>
+          {row.map((item, itemIndex) => (
+            <Product
+              key={item.num}
+              num={item.num}
+              name={item.NAME}
+              category={item.category}
+              price={item.price}
+              goods_img={item.image}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 }

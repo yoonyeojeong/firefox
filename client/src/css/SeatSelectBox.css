@@ -1,0 +1,24 @@
+.SeatSelectBox_select1,
+.SeatSelectBox_select2 {
+  font-size: 25px;
+  height: 30px;
+  width: 400px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.SeatSelectBox_select3 {
+  font-size: 25px;
+  height: 30px;
+  width: 400px;
+  margin-bottom: 28px;
+  margin-left: 10px;
+}
+
+.SeatSelectBox_getPrice {
+  border: 1px solid rgb(255, 192, 0);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 25px;
+  color: rgb(255, 192, 0);
+}

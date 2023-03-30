@@ -1,0 +1,65 @@
+.boardpost {
+  background-color: black;
+  text-align: center;
+}
+
+.boardpost_form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
+  height: 850px;
+}
+
+.boardpost_title {
+  padding-top: 50px;
+  margin-bottom: 40px;
+  font-size: 45px;
+  font-weight: bolder;
+}
+
+.boardpost_name > input {
+  border: 2px solid rgb(255, 192, 0);
+  margin-bottom: 20px;
+  padding-left: 15px;
+  width: 1000px;
+  height: 40px;
+}
+
+.boardpost_name > input::placeholder {
+  font-size: 15px;
+  font-family: "휴먼바탕체";
+}
+.boardpost_content > textarea::placeholder {
+  font-size: 15px;
+  font-family: "휴먼바탕체";
+}
+
+.boardpost_content > textarea {
+  border: 2px solid rgb(255, 192, 0);
+  margin-bottom: 20px;
+  padding-top: 15px;
+  padding-left: 15px;
+  width: 1000px;
+  height: 400px;
+}
+
+.boardpost_name > p,
+.boardpost_content > p {
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 20px;
+  color: #666666;
+  font-weight: bold;
+}
+
+.boardpost_button {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 20px;
+  background-color: rgb(255, 192, 0);
+}

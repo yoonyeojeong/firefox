@@ -18,18 +18,6 @@ body {
   font-size: 0;
   color: transparent;
 }
-.hanwhaGothicT {
-  color: rgb(255, 192, 0);
-}
-.hanwhaGothicEL {
-  color: rgb(255, 192, 0);
-}
-.hanwhaGothicL {
-  color: rgb(255, 192, 0);
-}
-.hanwhaGothicR {
-  color: rgb(255, 192, 0);
-}
 .yellow {
   color: rgb(255, 192, 0) !important;
 }
@@ -49,11 +37,9 @@ body {
 /* container */
 #container {
   overflow-x: hidden;
-  font-family: "HanwhaGothicB", sans-serif;
   padding-bottom: 230px;
 }
 #container .btn_area {
-  font-family: "MyriadPro-Regular", sans-serif;
   font-size: 0;
   text-align: center;
 }

@@ -2,8 +2,27 @@ import React from "react";
 import "./css/common.css";
 import "./css/reset.css";
 import "./css/footer.css";
+import axios from "axios";
+import Login from "./pages/Login";
+import { useEffect, useState } from "react";
 
 function Footer() {
+  const accessToken = () => {
+    axios({
+      url: "http://localhost:5000/accesstoken",
+      method: "GET",
+      withCredentials: true,
+    });
+  };
+
+  const refreshToken = () => {
+    axios({
+      url: "http://localhost:5000/refreshtoken",
+      method: "GET",
+      withCredentials: true,
+    });
+  };
+
   return (
     <footer id="footer">
       <h1>
@@ -47,6 +66,15 @@ function Footer() {
             <a href="/ETC/TM/ETCTMSI01.do">사이트맵</a>
           </li>
         </ul>
+
+        <button onClick={accessToken} className="App-link">
+          get Access Token
+        </button>
+        <br />
+        <button onClick={refreshToken} className="App-link">
+          get Refresh Token
+        </button>
+        <br />
       </div>
 
       <p className="copyright">

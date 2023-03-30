@@ -1,16 +1,12 @@
 import React from "react";
 import "../css/MyInfo.css";
 import { useNavigate } from "react-router-dom";
-import { useStateValue } from "../components/StateProvider";
-import { auth } from "../firebase";
 
 function MyInfo() {
-  const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const repass = () => {
     alert("비밀번호가 변경되었습니다. 다시 로그인하세요.");
     // 로그아웃 함수자리
-    auth.signOut();
     navigate("/");
   };
   const rename = () => {

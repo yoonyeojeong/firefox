@@ -1,0 +1,100 @@
+.board {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: black;
+  border-radius: 5px;
+  width: 1200px;
+  margin-bottom: 100px;
+}
+#board_title {
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 70px;
+  padding-left: 80px;
+  padding-top: 70px;
+  padding-bottom: 35px;
+}
+
+.board_search_txt {
+  background-color: #555555;
+  color: white;
+  padding-left: 10px;
+  margin-right: 10px;
+  height: 25px;
+}
+.board_search {
+  color: white;
+  text-align: right;
+  padding-bottom: 5px;
+}
+
+.board_select {
+  background-color: #555555;
+  color: white;
+  margin-right: 5px;
+  height: 25px;
+}
+
+.board_table {
+  color: #666666;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1100px;
+}
+
+.board_table_title_tr {
+  border: 2px solid white;
+}
+.board_table_title_tr > th {
+  height: 50px;
+  vertical-align: middle;
+}
+
+.board_table_title_td {
+  font-size: 13px;
+  border-bottom: 1px solid #818181;
+}
+.board_table_title_td > td {
+  height: 40px;
+  vertical-align: middle;
+}
+.board_button {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 21px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 20px;
+  color: black;
+  background-color: rgb(255, 192, 0);
+}
+
+.board_button_div {
+  text-align: right;
+  margin-right: 50px;
+}
+.board_table > tr > td {
+  vertical-align: middle;
+}
+
+.board_table_title_td :nth-child(1) {
+  width: 70px;
+}
+
+.board_table_title_td :nth-child(2) {
+  text-align: left;
+}
+
+.board_table_title_td :nth-child(3) {
+  width: 80px;
+}
+.board_table_title_td :nth-child(4) {
+  width: 100px;
+}
+
+.board_table_title_td :nth-child(5) {
+  width: 70px;
+}

@@ -13,8 +13,11 @@ const RenderHeader = ({ currentMonth, prevMonth, nextMonth }) => {
           <span className="left_arrow">
             <Icon icon="bi:arrow-left-circle-fill" onClick={prevMonth} />
           </span>
-          <span className="text month">{format(currentMonth, "M")}월</span>
-          {format(currentMonth, "yyyy")}
+          <span className="text month">
+            {format(currentMonth, "yyyy")}년 {format(currentMonth, "M")}월
+            경기일정
+          </span>
+
           <span className="right_arrow">
             <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth} />
           </span>

@@ -4,85 +4,53 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useFetch from "../hooks/useFetch";
+import { useDispatch } from "react-redux";
+import { setToken } from "../reducer/AuthReducer";
 
-function Login() {
-  const [user] = useFetch("http://localhost:5000/api/users");
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+const userInfoInitial = () => {
+  return {
     user_id: "",
     user_pw: "",
+  };
+};
+
+function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [userInfo, setUserInfo] = useState(() => {
+    return userInfoInitial();
   });
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const userData = () => {
-    const url = "/api/login/" + formData.user_id;
-    const newFormData = new FormData();
-    newFormData.append("user_id", formData.user_id);
-    newFormData.append("user_pw", formData.user_pw);
-
-    const config = {
-      headers: {
-        "content-type": "application/json",
+  const login = () => {
+    axios({
+      url: "http://localhost:5000/login",
+      method: "POST",
+      withCredentials: true,
+      data: {
+        user_id: userInfo.user_id,
+        user_pw: userInfo.user_pw,
       },
-    };
-
-    return axios.post(url, newFormData, config);
-  };
-
-  const LoginFunc = (e) => {
-    var checkUser = [];
-    checkUser =
-      user &&
-      user.map((u) => {
-        if (u.user_id === formData.user_id && u.user_pw === formData.user_pw) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-
-    if (checkUser.includes(true)) {
-      e.preventDefault();
-      userData().then((res) => {
-        console.log(res.data);
-      });
-
-      checkUser = [];
-
-      if (formData.user_id === "admin") {
-        setFormData({
-          user_id: "",
-          user_pw: "",
-        });
-        navigate("/admin/qna");
-      } else {
-        setFormData({
-          user_id: "",
-          user_pw: "",
-        });
-        navigate("/");
+    }).then((result) => {
+      if (result.status === 200) {
+        window.open("/", "_self");
       }
-
-      window.location.reload();
-    } else {
-      alert("회원정보가 일치하지 않습니다.");
-      window.location.reload();
-    }
+    });
+    navigate("/");
   };
-
+  const handleInputChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <div className="wrapper">
       <h1 className="login_title">LOGIN</h1>
       <h4>파이어폭스 회원 로그인</h4>
-      <form onSubmit={LoginFunc}>
+      <form onSubmit={login}>
         <div className="user_id">
           <p>아이디</p>
           <input
             onChange={handleInputChange}
             name="user_id"
-            value={formData.user_id}
+            value={userInfo.user_id}
             className="login_form"
             type="text"
             id="user_id"
@@ -94,7 +62,7 @@ function Login() {
           <input
             onChange={handleInputChange}
             name="user_pw"
-            value={formData.user_pw}
+            value={userInfo.user_pw}
             className="login_form"
             type="password"
             id="user_pw"

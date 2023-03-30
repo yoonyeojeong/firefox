@@ -104,6 +104,7 @@ function AdminGoods() {
                     name="price"
                     value={formData.price}
                     onChange={handleInputChange}
+                    step="100"
                     required
                   />
                 </td>
@@ -166,7 +167,7 @@ function AdminGoods() {
             {goods &&
               goods.map((p) => {
                 return (
-                  <tr>
+                  <tr key={p.num}>
                     <td className="admin_goods_list_table_td">{p.num}</td>
                     <td className="admin_goods_list_table_td">{p.NAME}</td>
                     <td className="admin_goods_list_table_td">{p.category}</td>

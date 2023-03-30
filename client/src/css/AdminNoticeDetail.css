@@ -1,0 +1,68 @@
+.adminnoticedetail form > h2 {
+  margin-top: 15px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+.adminnoticedetail_title {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.adminnoticedetail_box {
+  width: 850px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.432);
+}
+
+.adminnoticedetail_btn {
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgba(255, 191, 0, 0.726);
+  border-radius: 5px;
+  width: 120px;
+  height: 35px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
+.adminnoticedetail_btn1 {
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgba(200, 255, 0, 0.603);
+  border-radius: 5px;
+  width: 100px;
+  height: 35px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+}
+
+.adminnoticedetail_input1 {
+  border-radius: 5px;
+  width: 800px;
+  height: 35px;
+}
+
+.adminnoticedetail_input2 {
+  border-radius: 5px;
+  width: 800px;
+  height: 300px;
+  margin-bottom: 15px;
+  font-family: "휴먼바탕체";
+  font-size: 15px;
+}
+
+.adminnoticedetail_btn_box {
+  text-align: center;
+  display: inline;
+  margin-left: 280px;
+}

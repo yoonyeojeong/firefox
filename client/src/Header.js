@@ -4,31 +4,49 @@ import "./css/reset.css";
 import "./css/common.css";
 import "./css/main.css";
 import live from "./images/common/Live.png";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import useFetch from "./hooks/useFetch";
+import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 
 function Header() {
-  const [user] = useFetch("http://localhost:5000/api/users");
-  const [checkUser, setCheckUser] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      const isLoggedIn = user.some((u) => u.isLogin === 1);
-      setCheckUser(isLoggedIn);
-    }
-  }, [user]);
-
-  const logoutFunction = () => {
-    if (checkUser) {
-      const url = "/api/logout/";
-      navigate("/");
-      window.location.reload();
-      setCheckUser(false);
-      axios.post(url);
+  const [user, setUser] = useState();
+  const [isLogin, setIsLogin] = useState(false);
+  const logout = () => {
+    console.log("로그아웃 함수 실행");
+    if (isLogin && window.confirm("로그아웃 하시겠습니까?")) {
+      axios({
+        url: "http://localhost:5000/logout",
+        method: "POST",
+        withCredentials: true,
+      }).then((result) => {
+        if (result.status === 200) {
+        }
+      });
+      setTimeout(window.location.reload(), 1000);
     }
   };
+
+  useEffect(() => {
+    try {
+      axios({
+        url: "http://localhost:5000/login/success",
+        method: "GET",
+        withCredentials: true,
+      })
+        .then((result) => {
+          if (result.data) {
+            setIsLogin(true);
+            setUser(result.data);
+            console.log("Header useEffect");
+          }
+        })
+        .catch((error) => {
+          console.log("로그아웃상태");
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   return (
     <>
@@ -160,15 +178,13 @@ function Header() {
             <div className="util_menu">
               <ul>
                 <li>
-                  <Link to={!checkUser && "/login"}>
-                    <span onClick={logoutFunction}>
-                      {checkUser ? "LOGOUT" : "LOGIN"}
-                    </span>
+                  <Link to={!isLogin && "/login"}>
+                    <span onClick={logout}>{isLogin ? "LOGOUT" : "LOGIN"}</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to={checkUser ? "/mypage/checkout" : "/joinus"}>
-                    <span> {checkUser ? "MY PAGE" : "JOIN US"}</span>
+                  <Link to={isLogin ? "/mypage/checkout" : "/joinus"}>
+                    <span> {isLogin ? "MY PAGE" : "JOIN US"}</span>
                   </Link>
                 </li>
               </ul>

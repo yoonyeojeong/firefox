@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import "../css/common.css";
+import "../css/reset.css";
 import "../css/Ticket.css";
+import "../css/main.css";
+
+import Ticket_Modal from "../ticketPay/Payment/Payment_Ticket_Modal";
 
 function Ticket() {
+  // useState를 사용하여 open 상태를 변경한다. (open 일때 true로 만들어 열리는 방식)
+  const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const moveToTicketing = () => {
+    navigate("/ticket/ticketing");
+  };
   return (
     <div className="ticket_page">
       <h1>TICKET</h1>
@@ -10,9 +31,45 @@ function Ticket() {
         <br />
         <p> 홈경기 티켓 예매 안내</p>
       </div>
-      <button className="reservation" type="button">
-        예매하기
-      </button>
+      <React.Fragment>
+        <button onClick={openModal} className="reservation" type="button">
+          예매하기
+        </button>
+        {/* header 부분에 텍스트를 입력한다. */}
+        <Ticket_Modal open={modalOpen} close={closeModal} header="날짜 선택">
+          {/*여기에 글쓰면 경기 날짜 선택 할 코드 쓰면 됨*/}
+          <div className="ticketing_calendar">
+            <table className="ticketing_table">
+              <tr className="ticketing_tr">
+                <th className="ticketing_th">경기 일시</th>
+                <th className="ticketing_th">경기명</th>
+                <th className="ticketing_th">경기장</th>
+                <th className="ticketing_th">티켓 예매</th>
+              </tr>
+              <tr className="ticketing_tr">
+                <td className="ticketing_td">경기 날짜</td>
+                <td className="ticketing_td">한화 이글스 vs 파이어 폭스</td>
+                <td className="ticketing_td">FireFox KosmoPark</td>
+                <td className="ticketing_td">
+                  <button className="ticketing_btn" onClick={moveToTicketing}>
+                    선택
+                  </button>
+                </td>
+              </tr>
+              <tr className="ticketing_tr">
+                <td className="ticketing_td">경기 날짜</td>
+                <td className="ticketing_td">두산 베어스 vs 파이어 폭스</td>
+                <td className="ticketing_td">FireFox KosmoPark</td>
+                <td className="ticketing_td">
+                  <button className="ticketing_btn" onClick={moveToTicketing}>
+                    선택
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </Ticket_Modal>
+      </React.Fragment>
       <div className="ticket_reserve">
         <table className="reserve_table">
           <tr className="reserve_tr">

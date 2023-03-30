@@ -18,7 +18,7 @@ function Sidemenu() {
         <div className="sidemenu_option">내 정보 수정</div>
       </NavLink>
       <NavLink
-        to="/temp"
+        to="/mypage/QnA"
         style={({ isActive }) => ({ color: isActive ? "rgb(255,192,0" : "" })}
       >
         <div className="sidemenu_option">1대1 문의</div>

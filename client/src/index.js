@@ -3,16 +3,20 @@ import ReactDOM from "react-dom/client";
 import "./css/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { StateProvider } from "./components/StateProvider";
-import reducer, { initialState } from "./components/Reducer";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./reducer/configStore";
+import { PersistGate } from "redux-persist/integration/react";
+import persistStore from "redux-persist/es/persistStore";
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <StateProvider initialState={initialState} reducer={reducer}>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
       <App />
-    </StateProvider>
-  </React.StrictMode>
+    </PersistGate>
+  </Provider>
 );
 
 reportWebVitals();

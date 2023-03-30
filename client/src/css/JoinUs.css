@@ -166,3 +166,31 @@ input::placeholder {
   width: 95px;
   height: 35px;
 }
+
+.temp1 {
+  margin-top: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  width: 200px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 15px;
+  border: 1px solid #a3a3a3;
+  padding: 5px;
+  color: white;
+}
+
+.temp2 {
+  margin-top: 5px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  width: 200px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid #a3a3a3;
+  padding: 6px;
+  color: rgb(255, 192, 0);
+}

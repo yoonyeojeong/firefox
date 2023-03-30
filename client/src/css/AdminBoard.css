@@ -1,0 +1,69 @@
+.adminboard > h2 {
+  margin-top: 15px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.adminboard_title {
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.adminboard_box {
+  width: 950px;
+  margin-top: 12px;
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.432);
+}
+
+.adminboard_btn {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: rgb(255, 192, 0);
+  border-radius: 5px;
+  height: 20px;
+}
+
+.adminboard_table {
+  font-family: "함초롱바탕";
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 900px;
+  text-align: center;
+}
+
+.adminboard_table_tr > th {
+  height: 30px;
+  font-size: 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #666666;
+}
+
+.adminboard_table_td,
+.adminboard_table_td2 {
+  font-size: 15px;
+  vertical-align: middle;
+  height: 50px;
+  border-bottom: 1px solid #666666;
+}
+
+.adminboard_table_tr :nth-child(1),
+.adminboard_table_tr :nth-child(5),
+.adminboard_table_tr :nth-child(6),
+.adminboard_table_tr :nth-child(7) {
+  width: 100px;
+}
+
+.adminboard_table_tr :nth-child(3),
+.adminboard_table_tr :nth-child(4) {
+  width: 120px;
+}
+
+.adminboard_table_td2 {
+  text-align: left;
+}
