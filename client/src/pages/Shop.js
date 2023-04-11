@@ -111,7 +111,7 @@ function Shop() {
               name={item.NAME}
               category={item.category}
               price={item.price}
-              goods_img={item.image}
+              image={item.image}
             />
           ))}
         </div>
