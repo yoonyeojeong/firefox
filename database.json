@@ -1,0 +1,7 @@
+{
+  "host": "firefox.cbljt5va86ml.ap-northeast-1.rds.amazonaws.com",
+  "user": "admin",
+  "password": "admin123",
+  "port": "3306",
+  "database": "firefox"
+}

@@ -1,13 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#upload
-/upload
+# #upload
+# /upload
 
-#databse
-/database.json
+# #databse
+# /database.json
 
-#env
-/.env
+# #env
+# /.env
 
 
 # dependencies

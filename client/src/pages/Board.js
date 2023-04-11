@@ -22,7 +22,7 @@ function Board({ user_id }) {
   };
   // 임시 아이디
   const [content] = useFetch(
-    "http://localhost:5000/api/adminboardcommentlength"
+    "http://kosmofirefox-env.eba-vuzcbs28.ap-northeast-1.elasticbeanstalk.com/api/adminboardcommentlength"
   );
   const [searchData, setSearchData] = useState(() => initialSearchData());
 
