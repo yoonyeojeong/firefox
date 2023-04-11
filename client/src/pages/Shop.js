@@ -8,13 +8,9 @@ function Shop() {
   const [goods, setGoods] = useState([]);
   let newList = [];
   useEffect(() => {
-    axios
-      .get(
-        "http://kosmofirefox-env.eba-vuzcbs28.ap-northeast-1.elasticbeanstalk.com/api/product"
-      )
-      .then((res) => {
-        setGoods(res.data);
-      });
+    axios.get("http://localhost:5000/api/product").then((res) => {
+      setGoods(res.data);
+    });
   }, []);
 
   for (let i = 0; i < goods.length; i += 4) {
@@ -23,10 +19,7 @@ function Shop() {
   const searchApi = (category) => {
     //api 호출
     axios
-      .get(
-        "http://kosmofirefox-env.eba-vuzcbs28.ap-northeast-1.elasticbeanstalk.com/api/selectProduct?category=" +
-          category
-      )
+      .get("http://localhost:5000/api/selectProduct?category=" + category)
       .then((res) => {
         setGoods(res.data);
       });

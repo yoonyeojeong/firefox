@@ -12,9 +12,7 @@ const initialSearchData = () => {
 
 function Notice() {
   const navigate = useNavigate();
-  const [notices] = useFetch(
-    "http://kosmofirefox-env.eba-vuzcbs28.ap-northeast-1.elasticbeanstalk.com/api/notice"
-  );
+  const [notices] = useFetch("http://localhost:5000/api/notice");
   const [searchData, setSearchData] = useState(() => initialSearchData());
   const searchContent = () => {
     if (searchData.content === "") {
