@@ -29,7 +29,6 @@
 
 .boardcontents_hr2 {
   margin-top: 100px;
-  margin-bottom: 20px;
   width: 1100px;
 }
 
@@ -98,4 +97,7 @@
 
 .boardcontents_comment_form {
   vertical-align: middle;
+}
+.Boardcontent_p {
+  padding: 10px;
 }

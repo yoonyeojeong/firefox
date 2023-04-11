@@ -54,6 +54,7 @@
   width: 100px;
   padding: 15px;
   border: 1px solid white;
+  margin: 20px;
 }
 
 .myQnA_table {
@@ -92,6 +93,9 @@
   text-align: left;
 }
 
-.myQnA_table_td > td:nth-of-type(4) {
+.complete {
+  color: greenyellow;
+}
+.beforeComment {
   color: rgb(253, 49, 49);
 }

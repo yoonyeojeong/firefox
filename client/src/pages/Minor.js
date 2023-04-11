@@ -1,8 +1,9 @@
 import React from "react";
 import "../css/Minor.css";
+import secondSchedule from "../images/2ndSchedule.jpg";
 
 function Minor() {
-  return <h1>2군일정 임시페이지</h1>;
+  return <img src={secondSchedule} alt="" className="minor" />;
 }
 
 export default Minor;

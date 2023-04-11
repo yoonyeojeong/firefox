@@ -1,12 +1,29 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import "../css/Notice.css";
 import { FaSearch } from "react-icons/fa";
 import useFetch from "../hooks/useFetch";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+const initialSearchData = () => {
+  return {
+    option: "TITLE",
+    content: "",
+  };
+};
 
 function Notice() {
+  const navigate = useNavigate();
   const [notices] = useFetch("http://localhost:5000/api/notice");
+  const [searchData, setSearchData] = useState(() => initialSearchData());
+  const searchContent = () => {
+    if (searchData.content === "") {
+      alert("검색어를 입력하세요");
+    } else if (searchData.option === "TITLE") {
+      navigate(`/fan/notice/TITLE/${searchData.content}`);
+    }
+  };
+  const handleInputChange = (e) => {
+    setSearchData({ ...searchData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="notice">
@@ -16,13 +33,19 @@ function Notice() {
           <tbody>
             <tr>
               <td colSpan="5" className="notice_search">
-                <span>제목</span>
-                <input
-                  className="notice_search_txt"
-                  type="text"
-                  placeholder="제목으로 검색하기"
-                />
-                <FaSearch />
+                <form onSubmit={searchContent}>
+                  <span>제목</span>
+                  <input
+                    className="board_search_txt"
+                    type="text"
+                    placeholder="검색하기"
+                    name="content"
+                    onChange={handleInputChange}
+                  />
+                  <button type="submit">
+                    <FaSearch />
+                  </button>
+                </form>
               </td>
             </tr>
 
@@ -41,7 +64,7 @@ function Notice() {
                       <Link to={`/fan/notice/${item.NUM}`}>{item.TITLE}</Link>
                     </td>
                     <td>{item.REGDATE}</td>
-                    <td>여기 채워줘야함</td>
+                    <td>{item.VIEWS}</td>
                   </tr>
                 );
               })}

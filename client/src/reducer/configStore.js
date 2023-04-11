@@ -1,22 +1,29 @@
-import { persistReducer } from "redux-persist";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import userSlice from "./userSlice.js";
+import paypriceSlice from "./paypriceSlice";
 import { AuthReducer } from "./AuthReducer";
-import { createStore, combineReducers } from "redux";
-// local storage 사용
+import seatNumReducer from "./seatNumSlice";
+import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
   key: "root",
-  //local storage에 저장
   storage: storage,
 };
 
-const allReducers = combineReducers({
+const rootReducer = combineReducers({
+  user: userSlice,
+  pay: paypriceSlice,
   Auth: AuthReducer,
+  seatNum: seatNumReducer,
 });
 
-const store = createStore(
-  persistReducer(persistConfig, allReducers),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default store;
+export default configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});

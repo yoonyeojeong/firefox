@@ -1,40 +1,82 @@
 /* Styles for Major_player components */
+
 .Major_player {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .major_num {
-    width: 30%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  
-  .major_num img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .major_num p {
-    margin: 0;
-  }
-  
-  /* Styles for Major_player_row */
-  .Major_player_row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .Major_player_row .major_num {
-    width: 30%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    text-align: center;
-    margin-bottom: 10px;
-  }
+  background-color: black;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  padding-left: auto;
+  padding-right: auto;
+}
+
+.major_num {
+  border: 1px solid rgba(255, 255, 255, 0.493);
+  border-radius: 7px;
+  text-align: center;
+  width: 320px;
+  height: 400px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.major_num_p {
+  margin-top: 10px;
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+
+.major_num > img {
+  width: 260px;
+  height: 200px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.major_num_table {
+  width: 270px;
+  margin-left: 32px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.major_num_tr > th {
+  width: 90px;
+  height: 20px;
+}
+
+.major_num_tr {
+  height: 20px;
+}
+
+/* Styles for Major_player_row */
+.Major_player_row {
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.Major_player_row .major_num {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.Major_player_box > h3 {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  border-bottom: 2px solid rgb(255, 192, 0);
+  padding-bottom: 20px;
+}
+
+.Major_player_box {
+  text-align: center;
+  width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -20,7 +20,8 @@ function AdminGoods() {
     newFormData.append("name", formData.name);
     newFormData.append("price", formData.price);
     newFormData.append("category", formData.category);
-    newFormData.append("filename", formData.filename);
+    newFormData.append("image", formData.file);
+    console.log("formData : ", formData);
 
     const config = {
       headers: {
@@ -57,7 +58,7 @@ function AdminGoods() {
         file: null,
       });
       alert("상품이 등록되었습니다.");
-      window.location.reload();
+      setTimeout(window.location.reload(), 1000);
     } else {
       alert("상품등록을 취소하였습니다.");
     }
@@ -73,6 +74,22 @@ function AdminGoods() {
       window.location.reload();
     } else {
       alert("취소하였습니다.");
+    }
+  };
+  const categoryFunction = (category) => {
+    switch (category) {
+      case "a":
+        return "유니폼";
+      case "b":
+        return "모자";
+      case "c":
+        return "의류";
+      case "d":
+        return "잡화";
+      case "e":
+        return "기념상품";
+      default:
+        return "기념상품";
     }
   };
 
@@ -120,11 +137,11 @@ function AdminGoods() {
                     onChange={handleInputChange}
                   >
                     <option value="">선택하기</option>
-                    <option value="유니폼">유니폼</option>
-                    <option value="모자">모자</option>
-                    <option value="의류">의류</option>
-                    <option value="잡화">잡화</option>
-                    <option value="기념상품">기념상품</option>
+                    <option value="a">유니폼</option>
+                    <option value="b">모자</option>
+                    <option value="c">의류</option>
+                    <option value="d">잡화</option>
+                    <option value="e">기념상품</option>
                   </select>
                 </td>
                 <td className="goods_regist_td"></td>
@@ -134,10 +151,11 @@ function AdminGoods() {
                 <td className="goods_regist_td">
                   <input
                     type="file"
-                    name="file"
+                    name="image"
                     file={formData.file}
                     value={formData.filename}
                     onChange={handleImageChange}
+                    required
                   />
                 </td>
                 <td className="goods_regist_td"></td>
@@ -170,7 +188,9 @@ function AdminGoods() {
                   <tr key={p.num}>
                     <td className="admin_goods_list_table_td">{p.num}</td>
                     <td className="admin_goods_list_table_td">{p.NAME}</td>
-                    <td className="admin_goods_list_table_td">{p.category}</td>
+                    <td className="admin_goods_list_table_td">
+                      {categoryFunction(p.category)}
+                    </td>
                     <td className="admin_goods_list_table_td">{p.price}</td>
                     <td className="admin_goods_list_table_td">
                       <button onClick={(e) => deleteProduct(p.num)}>

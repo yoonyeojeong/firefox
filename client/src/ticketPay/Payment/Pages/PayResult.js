@@ -1,52 +1,42 @@
-import React from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import useFetch from "../../../hooks/useFetch";
+// import { setInitialState } from "../reducer/paypriceSlice";
 
-class PayResult extends React.Component {
-  constructor(props) {
-    super(props);
-    const { params } = this.state;
-    const {
-      location: { search },
-    } = props;
+function PayResult() {
+  const price = useSelector((state) => state.pay.price);
+  const val1 = useSelector((state) => state.pay.val1);
+  const val2 = useSelector((state) => state.pay.val2);
+  const val3 = useSelector((state) => state.pay.val3);
+  const number = useSelector((state) => state.pay.number);
+  const ground = useSelector((state) => state.pay.ground);
+  // const dispatch = useDispatch();
+  const navigator = useNavigate();
 
-    // url에 붙어서 온 pg_token을 결제 API에 줄 params에 할당
-    params.pg_token = search.split("=")[1];
-  }
-
-  state = {
-    params: {
-      cid: "TC0ONETIME",
-      // localstorage에서 tid값을 읽어온다.
-      tid: window.localStorage.getItem("tid"),
-      partner_order_id: "partner_order_id",
-      partner_user_id: "partner_user_id",
-      pg_token: "",
-    },
+  const home = () => {
+    navigator("/");
   };
+  const { id } = useParams();
+  const [ticketImpo] = useFetch("/api/succesTicketing/" + id);
 
-  componentDidMount() {
-    const { params } = this.state;
-
-    axios({
-      url: "/v1/payment/approve",
-      method: "POST",
-      headers: {
-        Authorization: "KakaoAK de0e3076b485b703b1f1a4a2419440e6",
-        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-      },
-      params,
-    }).then((response) => {
-      // 결제 승인에 대한 응답 출력
-      console.log(response);
-    });
-  }
-
-  render() {
-    return (
+  console.log("ticketImpo", ticketImpo);
+  return (
+    <div>
+      <h1>결제가 완료되었습니다.</h1>
+      <p>주문 상품</p>
+      <div>경기장소 : {ground} </div>
+      <div> 티켓 수 : {number}</div>
       <div>
-        <h2>Result page</h2>
+        티켓 명 :{val1}-{val2}-{val3}
       </div>
-    );
-  }
+
+      <div>가격 : {price}</div>
+      <p>감사합니다.</p>
+      <button onClick={home}> 홈으로 가기</button>
+    </div>
+  );
 }
+
 export default PayResult;

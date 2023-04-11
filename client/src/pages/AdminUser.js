@@ -1,7 +1,9 @@
 import React from "react";
 import "../css/AdminUser.css";
+import useFetch from "../hooks/useFetch";
 
 function AdminUser() {
+  const [user] = useFetch("http://localhost:5000/api/users");
   return (
     <div className="adminuser">
       <h2>회원 관리</h2>
@@ -36,7 +38,7 @@ function AdminUser() {
             </div>
 
             <div className="adminuser_form">
-              <label for="email">
+              <label>
                 이메일:
                 <input
                   type="text"
@@ -65,27 +67,23 @@ function AdminUser() {
                 <th>전화번호</th>
                 <th>이메일</th>
               </tr>
-              <tr className="adminuser_tatle_tr">
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>asasas8520@naver.com</td>
-              </tr>
-              <tr className="adminuser_tatle_tr">
-                <td>1</td>
-                <td>asasas8520</td>
-                <td>유나은</td>
-                <td>010-5808-5698</td>
-                <td>asasas8520@naver.com</td>
-              </tr>
-              <tr className="adminuser_tatle_tr">
-                <td>1</td>
-                <td>dbsduwjd123</td>
-                <td>김첨지</td>
-                <td>4</td>
-                <td>asasas8520@naver.com</td>
-              </tr>
+              {user &&
+                user.map((item) => {
+                  return (
+                    <tr className="adminuser_tatle_tr" key={item.user_num}>
+                      <td>{item.user_num}</td>
+                      <td>{item.user_id}</td>
+                      <td>{item.user_name}</td>
+                      <td>
+                        {item.phone_num_head}-{item.phone_num_middle}-
+                        {item.phone_num_last}
+                      </td>
+                      <td>
+                        {item.email}@{item.domain}
+                      </td>
+                    </tr>
+                  );
+                })}
             </thead>
             <tbody></tbody>
           </table>

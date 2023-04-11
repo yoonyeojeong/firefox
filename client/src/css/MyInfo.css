@@ -12,7 +12,7 @@
   width: 800px;
   padding: 20px;
 }
-.myinfo_content_box > tr > td {
+.myinfo_content_box > tbody > tr > td {
   vertical-align: middle;
 }
 
@@ -21,10 +21,10 @@
   vertical-align: top;
 }
 
-.myinfo_content_box > tr:first-child {
+.myinfo_content_box > tbody > tr:first-child {
   border-top: solid 2px rgb(255, 192, 0);
 }
-.myinfo_content_box > tr > td {
+.myinfo_content_box > tbody > tr > td {
   font-size: 18px;
   padding: 10px;
   border-bottom: solid 1px rgb(255, 192, 0);

@@ -44,6 +44,25 @@
 .buy_button {
   background-color: rgb(255, 192, 0);
   color: black;
-
   font-weight: bold;
+}
+
+.checkout_list {
+  margin-top: 5px;
+  border: 3px solid #8b0f2a;
+  border-radius: 5px;
+  padding-top: 10px;
+}
+
+.checkout_list_th {
+  height: 30px;
+  vertical-align: middle;
+  font-size: 20px;
+  border-bottom: 2px solid #8b0f2a;
+}
+
+.checkout_list_td > td {
+  height: 30px;
+  vertical-align: middle;
+  font-size: 15px;
 }

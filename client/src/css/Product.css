@@ -24,9 +24,9 @@
   object-fit: contain;
   max-height: 200px;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 50px;
+  margin-top: auto;
 }
-
 .product_info > button {
   vertical-align: middle;
   background-color: #222222;

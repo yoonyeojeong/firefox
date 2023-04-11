@@ -11,6 +11,9 @@
   display: inline-block;
   vertical-align: middle;
 }
+.item_photo_view_box > img {
+  max-width: 600px;
+}
 .goods_qty .text {
   margin-bottom: 10px;
   float: left;

@@ -18,29 +18,37 @@ function Login() {
   });
 
   const login = () => {
-    axios({
-      url: "http://localhost:5000/login",
-      method: "POST",
-      withCredentials: true,
-      data: {
-        user_id: userInfo.user_id,
-        user_pw: userInfo.user_pw,
-      },
-    })
-      .then((result) => {
-        console.log("result status : ", result.status);
-        if (result.status === 200 && userInfo.user_id == "admin") {
-          window.open("/", "_self");
-          navigate("/admin/qna");
-        } else if (result.status === 200 && userInfo.user_id != "admin") {
-          window.open("/", "_self");
-          navigate("/");
-        }
+    if (window.confirm("로그인 하시겠습니까?")) {
+      axios({
+        url: "http://localhost:5000/login",
+        method: "POST",
+        withCredentials: true,
+        data: {
+          user_id: userInfo.user_id,
+          user_pw: userInfo.user_pw,
+        },
       })
-      .catch(() => {
-        alert("일치하는 회원 정보가 없습니다.");
-      });
+        .then((result) => {
+          console.log("result status : ", result.status);
+          if (result.status === 200 && userInfo.user_id === "admin") {
+            window.open("/", "_self");
+            navigate("/admin/qna");
+          } else if (result.status === 200 && userInfo.user_id !== "admin") {
+            window.open("/", "_self");
+            navigate("/");
+          }
+          if (result.status === 403) {
+            alert("일치하는 회원 정보가 없습니다.");
+          }
+        })
+        .catch(() => {
+          alert("일치하는 회원 정보가 없습니다.");
+        });
+    } else {
+      alert("로그인 취소");
+    }
   };
+
   const handleInputChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };

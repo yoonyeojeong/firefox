@@ -79,7 +79,7 @@ function AboutHistory() {
       <div>
         <div div className="team_img2">
           <div>
-            <img className="team_imgs" salt="" />
+            <img className="team_imgs" alt="" />
             <p>
               이름: 이현정
               <br />

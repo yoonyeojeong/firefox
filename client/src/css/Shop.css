@@ -69,6 +69,7 @@
 }
 
 .product_category_button:hover,
-.product_category_button:active {
+.product_category_button:active,
+.product_category_button:focus {
   color: white;
 }

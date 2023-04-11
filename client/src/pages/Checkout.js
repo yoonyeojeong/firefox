@@ -4,34 +4,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Checkout() {
+function Checkout({ userId }) {
   const navigate = useNavigate();
   const [basket, setBasket] = useState([]);
   const [itemList, setItemList] = useState([]);
   const [CheckList, setCheckList] = useState([]);
   const [price, setPrice] = useState(0);
-  const [userId, setUserId] = useState();
-  useEffect(() => {
-    try {
-      axios({
-        url: "http://localhost:5000/login/success",
-        method: "GET",
-        withCredentials: true,
-      })
-        .then((result) => {
-          if (result.data) {
-            setUserId(result.data.user_id);
-            console.log("checkout user_id : ", result.data.user_id);
-          }
-        })
-        .catch((error) => {
-          console.log("로그아웃상태");
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/selectBasket?userId=" + userId)
@@ -118,6 +96,52 @@ function Checkout() {
   const buyProduct = () => {
     // navigate('결제화면');
   };
+
+  //////////////////////////////// 결제(JY) /////////////////////////////////////////////
+  const [nextRedirectPcUrl, setNextRedirectPcUrl] = useState("");
+  const [tid, setTid] = useState("");
+
+  const params = {
+    cid: "TC0ONETIME",
+    partner_order_id: "partner_order_id",
+    partner_user_id: "partner_user_id",
+    item_name: " 초코파이",
+    quantity: 1,
+    total_amount: 2000,
+    vat_amount: 200,
+    tax_free_amount: 0,
+    approval_url: "http://localhost:3000/",
+    fail_url: "http://localhost:3000/",
+    cancel_url: "http://localhost:3000/",
+  };
+  console.log(params);
+  useEffect(() => {
+    axios({
+      url: "https://kapi.kakao.com/v1/payment/ready",
+      method: "POST",
+      headers: {
+        Authorization: "KakaoAK 1461caa3c830eaa73cdd9c85314a314e",
+        "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+      params: params,
+    }).then((response) => {
+      console.log("카카오는 보아라", response);
+      // const {
+      //   data: { next_redirect_pc_url, tid },
+      // } = response;
+      console.log("data", response.data);
+
+      setNextRedirectPcUrl(response.data.next_redirect_pc_url);
+      console.log(response.data.next_redirect_pc_url);
+      setTid(response.data.tid);
+    });
+  }, []);
+  /////////////////////////////////////////////////////////////////////////////
+  const handleDelete = () => {
+    axios.post("http://localhost:5000/api/goodsDel/" + userId, {
+      user_Id: userId,
+    });
+  };
   return (
     <div className="checkout">
       <div className="checkout_box">
@@ -132,16 +156,8 @@ function Checkout() {
         <div className="checkout_list">
           <table style={{ width: "-webkit-fill-available" }}>
             <thead>
-              <tr>
-                <th style={{ width: 10 + "%" }}>
-                  {" "}
-                  <input
-                    type="checkbox"
-                    id="save_id"
-                    onChange={onChangeAll}
-                    checked={CheckList.length === itemList.length}
-                  />
-                </th>
+              <tr className="checkout_list_th">
+                <th style={{ width: 10 + "%" }}>🏏</th>
                 <th>상품정보</th>
                 <th style={{ width: 10 + "%" }}>수량</th>
                 <th style={{ width: 10 + "%" }}>금액</th>
@@ -150,15 +166,8 @@ function Checkout() {
             </thead>
             <tbody>
               {basket.map((product, productIndex) => (
-                <tr key={product.id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      id="save_id"
-                      onChange={(e) => onChangeEach(e, product.id)}
-                      checked={CheckList.includes(product.id)}
-                    />
-                  </td>
+                <tr key={product.id} className="checkout_list_td">
+                  <td>⚾</td>
                   <td>{product.NAME}</td>
                   <td>{product.cnt}</td>
                   <td>
@@ -188,8 +197,12 @@ function Checkout() {
           <button className="continue_shopping" onClick={goShop}>
             계속 쇼핑하기
           </button>
-          <button className="buy_button" onClick={buyProduct}>
-            구매하기
+          <button
+            className="buy_button"
+            onClick={handleDelete}
+            // onClick={handleSubmit}
+          >
+            <a href={nextRedirectPcUrl}>구매하기</a>
           </button>
         </div>
       </div>

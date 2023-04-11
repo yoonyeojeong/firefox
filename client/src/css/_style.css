@@ -1,0 +1,88 @@
+.calendar {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+.header .text {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.header .text .left_arrow,
+.header .text .right_arrow {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.days {
+  display: flex;
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.days .col {
+  flex: 1;
+  text-align: center;
+}
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ccc;
+}
+
+.col {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+.col.disabled {
+  color: #ccc;
+}
+
+.col.not-valid {
+  background-color: #f5f5f5;
+}
+
+.col.selected {
+  background-color: #333;
+  color: #fff;
+}
+
+.text.day-num {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.text.day-num.not-current-month {
+  color: #ccc;
+}
+
+.schedule {
+  margin-top: 5px;
+}
+
+.game {
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+}
+
+.admin-schedule {
+  margin-top: 10px;
+}

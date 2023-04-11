@@ -35,6 +35,16 @@
   font-weight: bold;
 }
 
+.myticketing_button1 {
+  font-size: 15px;
+  background-color: #656565;
+  border-radius: 3px;
+  padding: 4px;
+  width: 100px;
+  height: 40px;
+  margin-right: 10px;
+}
+
 .myticketing_button {
   font-size: 15px;
   background-color: #656565;
@@ -43,6 +53,7 @@
   width: 100px;
   height: 40px;
 }
+
 .myticketing_txt_left {
   text-align: left;
   width: 500px;

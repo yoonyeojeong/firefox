@@ -3,7 +3,6 @@ import "../css/Board.css";
 import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import axios from "axios";
 const initialSearchData = () => {
   return {
     option: "TITLE",
@@ -11,14 +10,13 @@ const initialSearchData = () => {
   };
 };
 
-function BoardSearch() {
+function BoardSearch({ user_id }) {
   const { option, content } = useParams();
   const navigate = useNavigate();
   const goPosting = () => {
     navigate("/fan/board/post");
   };
   // 임시 아이디
-  const user_id = "cjck12";
   const [result] = useFetch(
     `http://localhost:5000/api/board/${option}/${content}`
   );

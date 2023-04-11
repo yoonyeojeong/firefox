@@ -5,34 +5,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-export default function Detail() {
+export default function Detail({ userId }) {
   const navigate = useNavigate();
   const [goods, setGoods] = useState([]);
   const [cnt, setCnt] = useState(1);
   const [price, setPrice] = useState(0);
   const { num } = useParams();
-
-  const [userId, setUserId] = useState();
-  useEffect(() => {
-    try {
-      axios({
-        url: "http://localhost:5000/login/success",
-        method: "GET",
-        withCredentials: true,
-      })
-        .then((result) => {
-          if (result.data) {
-            setUserId(result.data.user_id);
-          }
-        })
-        .catch((error) => {
-          console.log("로그아웃상태");
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   useEffect(() => {
     axios
@@ -88,7 +66,10 @@ export default function Detail() {
       <div className="item_photo_info_sec">
         {goods.map((good, rowIndex) => (
           <>
-            <div className="item_photo_view_box"></div>
+            <div className="item_photo_view_box">
+              {" "}
+              <img src={good.image} alt={good.name} />
+            </div>
             <div className="item_info_box">
               <div className="item_tit_detail_cont">
                 <div className="item_detail_tit">

@@ -3,7 +3,6 @@ import "../css/Board.css";
 import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import axios from "axios";
 
 const initialSearchData = () => {
   return {
@@ -12,14 +11,19 @@ const initialSearchData = () => {
   };
 };
 
-function Board() {
+function Board({ user_id }) {
   const navigate = useNavigate();
   const goPosting = () => {
-    navigate("/fan/board/post");
+    if (user_id) {
+      navigate("/fan/board/post");
+    } else {
+      alert("로그인이 필요합니다");
+    }
   };
   // 임시 아이디
-  const user_id = "cjck12";
-  const [content] = useFetch("http://localhost:5000/api/board");
+  const [content] = useFetch(
+    "http://localhost:5000/api/adminboardcommentlength"
+  );
   const [searchData, setSearchData] = useState(() => initialSearchData());
 
   const handleInputChange = (e) => {
@@ -33,6 +37,14 @@ function Board() {
       navigate(`/fan/board/TITLE/${searchData.content}`);
     } else if (searchData.option === "user_id") {
       navigate(`/fan/board/user_id/${searchData.content}`);
+    }
+  };
+
+  const commentLength = (num) => {
+    if (num === 0) {
+      return "";
+    } else {
+      return `(${num})`;
     }
   };
 
@@ -83,7 +95,7 @@ function Board() {
                     <td className="board_Link_td">
                       {" "}
                       <Link to={`/fan/board/contents/${item.NUM}`}>
-                        {item.TITLE}
+                        {item.TITLE} {commentLength(item.COUNT)}
                       </Link>
                     </td>
 

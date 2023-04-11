@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../css/AdminNotice.css";
 import useFetch from "../hooks/useFetch";
-import AdminNoticeDetail from "./AdminNoticeDetail";
 
 function AdminNotice() {
   const navigate = useNavigate();

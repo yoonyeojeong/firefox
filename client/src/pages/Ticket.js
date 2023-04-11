@@ -1,28 +1,47 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import "../css/common.css";
-import "../css/reset.css";
+import useFetch from "../hooks/useFetch";
+import { useDispatch } from "react-redux";
+import { setSchedule } from "../reducer/paypriceSlice";
 import "../css/Ticket.css";
-import "../css/main.css";
 
 import Ticket_Modal from "../ticketPay/Payment/Payment_Ticket_Modal";
 
-function Ticket() {
-  // useState를 사용하여 open 상태를 변경한다. (open 일때 true로 만들어 열리는 방식)
+function Ticket({ isLogin }) {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
   const openModal = () => {
-    setModalOpen(true);
+    if (isLogin) {
+      setModalOpen(true);
+    } else {
+      alert("로그인이 필요합니다.");
+      navigate("/");
+    }
   };
 
   const closeModal = () => {
     setModalOpen(false);
   };
 
-  const moveToTicketing = () => {
-    navigate("/ticket/ticketing");
-  };
+  const [schedules] = useFetch("/api/schedules");
+
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0); // 시간, 분, 초, 밀리초를 0으로 설정
+
+  const filteredSchedules = schedules
+    ?.filter((schedule) => {
+      const matchDate = new Date(schedule.schedule_date);
+      // console.log("time", typeof schedule.schedule_time);
+      // console.log("time", schedule.schedule_time);
+      return matchDate > currentDate;
+    })
+    .sort((a, b) => {
+      return new Date(a.schedule_date) - new Date(b.schedule_date);
+    })
+    .slice(0, 2);
+
   return (
     <div className="ticket_page">
       <h1>TICKET</h1>
@@ -35,37 +54,58 @@ function Ticket() {
         <button onClick={openModal} className="reservation" type="button">
           예매하기
         </button>
-        {/* header 부분에 텍스트를 입력한다. */}
         <Ticket_Modal open={modalOpen} close={closeModal} header="날짜 선택">
-          {/*여기에 글쓰면 경기 날짜 선택 할 코드 쓰면 됨*/}
           <div className="ticketing_calendar">
             <table className="ticketing_table">
-              <tr className="ticketing_tr">
-                <th className="ticketing_th">경기 일시</th>
-                <th className="ticketing_th">경기명</th>
-                <th className="ticketing_th">경기장</th>
-                <th className="ticketing_th">티켓 예매</th>
-              </tr>
-              <tr className="ticketing_tr">
-                <td className="ticketing_td">경기 날짜</td>
-                <td className="ticketing_td">한화 이글스 vs 파이어 폭스</td>
-                <td className="ticketing_td">FireFox KosmoPark</td>
-                <td className="ticketing_td">
-                  <button className="ticketing_btn" onClick={moveToTicketing}>
-                    선택
-                  </button>
-                </td>
-              </tr>
-              <tr className="ticketing_tr">
-                <td className="ticketing_td">경기 날짜</td>
-                <td className="ticketing_td">두산 베어스 vs 파이어 폭스</td>
-                <td className="ticketing_td">FireFox KosmoPark</td>
-                <td className="ticketing_td">
-                  <button className="ticketing_btn" onClick={moveToTicketing}>
-                    선택
-                  </button>
-                </td>
-              </tr>
+              {filteredSchedules?.map((schedule) => (
+                <React.Fragment key={schedule.schedule_id}>
+                  <tr className="ticketing_tr">
+                    <th className="ticketing_th">경기 일시</th>
+                    <th className="ticketing_th">경기명</th>
+                    <th className="ticketing_th">경기장</th>
+                    <th className="ticketing_th">티켓 예매</th>
+                  </tr>
+                  <tr className="ticketing_tr">
+                    <td className="ticketing_td">
+                      {new Date(schedule.schedule_date).toLocaleDateString()}{" "}
+                      {new Date(
+                        `2000-01-01T${schedule.schedule_time}Z`
+                      ).toLocaleTimeString("ko-KR", {
+                        hour12: false,
+                        hour: "numeric",
+                        minute: "numeric",
+                      })}
+                    </td>
+                    <td className="ticketing_td">{schedule.schedule_team}</td>
+                    <td className="ticketing_td">
+                      {schedule.schedule_place === "파이어폭스"
+                        ? "월드 메르디앙 경기장"
+                        : schedule.schedule_team + " 홈 경기장"}
+                    </td>
+                    <td className="ticketing_td">
+                      <button
+                        className="ticketing_btn"
+                        onClick={() => {
+                          navigate("/ticket/ticketing");
+                          dispatch(
+                            setSchedule({
+                              schedule_id: schedule.schedule_id,
+                              schedule_date: new Date(
+                                schedule.schedule_date
+                              ).toLocaleDateString(),
+                              schedule_time: schedule.schedule_time,
+                              schedule_team: schedule.schedule_team,
+                              schedule_place: schedule.schedule_place,
+                            })
+                          );
+                        }}
+                      >
+                        선택
+                      </button>
+                    </td>
+                  </tr>
+                </React.Fragment>
+              ))}
             </table>
           </div>
         </Ticket_Modal>
@@ -73,7 +113,7 @@ function Ticket() {
       <div className="ticket_reserve">
         <table className="reserve_table">
           <tr className="reserve_tr">
-            <td className="ticket_title" colspan="6">
+            <td className="ticket_title" colSpan="6">
               · 티켓예매
             </td>
           </tr>
@@ -100,7 +140,7 @@ function Ticket() {
           </tr>
           <tr className="reserve_tr">
             <td className="reserve_td">선 예매</td>
-            <td className="reserve_td" colspan="5">
+            <td className="reserve_td" colSpan="5">
               미 운영
             </td>
           </tr>
@@ -127,29 +167,29 @@ function Ticket() {
       <div className="league_fee_normal">
         <table className="fee_normal_table">
           <tr className="reserve_tr">
-            <td className="ticket_title" colspan="6">
+            <td className="ticket_title" colSpan="6">
               · 정규리그 티켓요금 - 일반석
             </td>
-            <td className="reserve_title_explain" colspan="4">
+            <td className="reserve_title_explain" colSpan="4">
               * 휴일 기준 : 금, 토, 일, 공휴일 ( 단위 : 원 / 1인 기준 )
             </td>
           </tr>
           <tr className="fee_normal_tr">
             <th
               className="fee_normal_th"
-              colspan="3"
-              rowspan="2"
+              colSpan="3"
+              rowSpan="2"
               id="left-line-none-th"
             >
               구 분
             </th>
-            <th className="fee_normal_th" colspan="2">
+            <th className="fee_normal_th" colSpan="2">
               성 인
             </th>
-            <th className="fee_normal_th" colspan="2">
+            <th className="fee_normal_th" colSpan="2">
               학 생
             </th>
-            <th className="fee_normal_th" colspan="2">
+            <th className="fee_normal_th" colSpan="2">
               어린이
             </th>
             <th className="fee_normal_th">비 고</th>
@@ -164,31 +204,31 @@ function Ticket() {
             <th className="fee_normal_th"></th>
           </tr>
           <tr className="fee_normal_tr">
-            <td className="fee_normal_td" rowspan="6" id="left-line-none-td">
+            <td className="fee_normal_td" rowSpan="6" id="left-line-none-td">
               <p>일</p>
               <br />
               <p>반</p>
               <br />
               <p>석</p>
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               <p>내</p>
               <p>야</p>
             </td>
             <td className="fee_normal_td">내야지정석(1F)</td>
             <td className="fee_normal_td">11,000</td>
             <td className="fee_normal_td">14,000</td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               5,000
             </td>
             <td className="fee_normal_td">7,000</td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               3,000
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               4,000
             </td>
-            <td className="fee_normal_td" rowspan="2"></td>
+            <td className="fee_normal_td" rowSpan="2"></td>
           </tr>
           <tr className="fee_normal_tr">
             <td className="fee_normal_td">내야지정석(2F)</td>
@@ -197,46 +237,46 @@ function Ticket() {
             <td className="fee_normal_td">6,000</td>
           </tr>
           <tr className="fee_normal_tr">
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               <p>외</p>
               <p>야</p>
             </td>
             <td className="fee_normal_td">외야커플석</td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               9,000
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               10,000
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               4,000
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               5,000
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               2,000
             </td>
-            <td className="fee_normal_td" rowspan="2">
+            <td className="fee_normal_td" rowSpan="2">
               3,000
             </td>
-            <td className="fee_normal_td" rowspan="2"></td>
+            <td className="fee_normal_td" rowSpan="2"></td>
           </tr>
           <tr className="fee_normal_tr">
             <td className="fee_normal_td">외야지정석</td>
           </tr>
           <tr className="fee_normal_tr">
-            <td className="fee_normal_td" colspan="2" rowspan="2">
+            <td className="fee_normal_td" colSpan="2" rowSpan="2">
               기타(할인)
             </td>
-            <td className="fee_normal_td" colspan="6" id="fee_normal_etc_1">
+            <td className="fee_normal_td" colSpan="6" id="fee_normal_etc_1">
               &nbsp;복지, 경로, 다자녀 카드 소지자 : 50%
             </td>
 
-            <td className="fee_normal_td" rowspan="2"></td>
+            <td className="fee_normal_td" rowSpan="2"></td>
           </tr>
           <tr className="fee_normal_tr">
-            <td className="fee_normal_td" colspan="6" id="fee_normal_etc_2">
+            <td className="fee_normal_td" colSpan="6" id="fee_normal_etc_2">
               &nbsp;키즈클럽 : 어린이 가입자 본인 외야지정석 무료입장
             </td>
           </tr>
@@ -247,15 +287,15 @@ function Ticket() {
       <div className="ticket_reserve">
         <table className="reserve_table">
           <tr className="reserve_tr">
-            <td className="ticket_title" colspan="4">
+            <td className="ticket_title" colSpan="4">
               · 정규리그 티켓요금 - 특화석
             </td>
-            <td className="reserve_title_explain" colspan="2">
+            <td className="reserve_title_explain" colSpan="2">
               * 휴일 기준 : 금, 토, 일, 공휴일 ( 단위 : 원 / 1인 기준 )
             </td>
           </tr>
           <tr className="reserve_tr">
-            <th className="reserve_th" colspan="3">
+            <th className="reserve_th" colSpan="3">
               구 분
             </th>
             <th className="reserve_th">평 일</th>
@@ -263,14 +303,14 @@ function Ticket() {
             <th className="reserve_th">비 고</th>
           </tr>
           <tr className="reserve_tr">
-            <td className="fee_special_line_none" rowspan="20">
+            <td className="fee_special_line_none" rowSpan="20">
               특<br />
               <br />
               화<br />
               <br />
               석<br />
             </td>
-            <td className="fee_special" rowspan="6">
+            <td className="fee_special" rowSpan="6">
               <p>중</p>
               <br />
               <p>앙</p>
@@ -319,7 +359,7 @@ function Ticket() {
             <td className="fee_special">4,6,7,8인실</td>
           </tr>
           <tr className="reserve_tr">
-            <td className="fee_special" rowspan="8">
+            <td className="fee_special" rowSpan="8">
               <p>내</p>
               <br />
               <p>야</p>
@@ -400,7 +440,7 @@ function Ticket() {
             <td className="fee_special"></td>
           </tr>
           <tr className="reserve_tr">
-            <td className="fee_special" rowspan="5">
+            <td className="fee_special" rowSpan="5">
               <p>외</p>
               <br />
               <p>야</p>
@@ -454,16 +494,16 @@ function Ticket() {
           </tr>
           <tr className="reserve_tr">
             <td className="fee_special">필드박스(1인)</td>
-            <td className="fee_special" colspan="2">
+            <td className="fee_special" colSpan="2">
               40,000
             </td>
             <td className="fee_special">8,10,15 인실</td>
           </tr>
           <tr className="reserve_tr">
-            <td className="fee_special" colspan="2">
+            <td className="fee_special" colSpan="2">
               스카이박스(1인)
             </td>
-            <td className="fee_special" colspan="2">
+            <td className="fee_special" colSpan="2">
               60,000
             </td>
             <td className="fee_special">10,15 인실</td>

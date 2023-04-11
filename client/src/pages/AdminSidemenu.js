@@ -6,11 +6,20 @@ import axios from "axios";
 function AdminSidemenu() {
   const navigate = useNavigate();
 
-  const logoutFunction = () => {
-    const url = "/api/logout/";
-    navigate("/");
-    axios.post(url);
-    window.location.reload();
+  const logout = () => {
+    console.log("로그아웃 함수 실행");
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      axios({
+        url: "http://localhost:5000/logout",
+        method: "POST",
+        withCredentials: true,
+      }).then((result) => {
+        if (result.status === 200) {
+          window.open("/", "_self");
+        }
+      });
+      navigate("/");
+    }
   };
 
   return (
@@ -58,15 +67,15 @@ function AdminSidemenu() {
         <div className="admin_sidemenu_option">게시판관리</div>
       </NavLink>
       <NavLink
-        to="/admin/photo"
+        to="/"
         style={({ isActive }) => ({ color: isActive ? "rgb(255,192,0" : "" })}
       >
-        <div className="admin_sidemenu_option">사진관리</div>
+        <div className="admin_sidemenu_option">Go HOME</div>
       </NavLink>
       <NavLink
         to="/"
         style={({ isActive }) => ({ color: isActive ? "rgb(255,192,0" : "" })}
-        onClick={logoutFunction}
+        onClick={logout}
       >
         <div className="admin_sidemenu_option">로그아웃</div>
       </NavLink>

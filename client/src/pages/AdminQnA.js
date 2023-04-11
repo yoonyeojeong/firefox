@@ -1,9 +1,10 @@
 import React from "react";
 import "../css/AdminQnA.css";
-import AdminQnAContent from "./AdminQnAContent";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 function AdminQnA({ qna_id, user_id, nick_name }) {
+  const [adminQnA] = useFetch("http://localhost:5000/api/adminQnA");
   return (
     <div className="adminQnA">
       <h2>고객문의</h2>
@@ -21,34 +22,23 @@ function AdminQnA({ qna_id, user_id, nick_name }) {
                 <th>작성일</th>
                 <th>처리상태</th>
               </tr>
-              <tr className="adminQnA_tatle_td">
-                <td>1</td>
-                <td>
-                  <Link to="/admin/adminQnAcontent">
-                    정신차리고 빨리 환불해줘요 죽고싶지 않다면
-                  </Link>
-                </td>
-                <td>아이돌빠</td>
-                <td>환불</td>
-                <td>2025-12-25</td>
-                <td>답변완료</td>
-              </tr>
-              <tr className="adminQnA_tatle_td">
-                <td>1</td>
-                <td>asasas8520</td>
-                <td>배송</td>
-                <td>착짱죽짱</td>
-                <td>2011-12-02</td>
-                <td>처리중</td>
-              </tr>
-              <tr className="adminQnA_tatle_td">
-                <td>1</td>
-                <td>dbsduwjd123</td>
-                <td>김첨지</td>
-                <td>4</td>
-                <td>4</td>
-                <td>처리중</td>
-              </tr>
+              {adminQnA &&
+                adminQnA.map((item) => {
+                  return (
+                    <tr className="adminQnA_tatle_td" key={item.qna_id}>
+                      <td>{item.qna_id}</td>
+                      <td>
+                        <Link to={`/admin/adminQnAcontent/${item.qna_id}`}>
+                          {item.title}
+                        </Link>
+                      </td>
+                      <td>{item.user_id}</td>
+                      <td>{item.category}</td>
+                      <td>{item.created_at}</td>
+                      <td>{item.status}</td>
+                    </tr>
+                  );
+                })}
             </thead>
             <tbody></tbody>
           </table>

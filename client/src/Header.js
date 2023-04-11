@@ -1,15 +1,54 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./css/Header.css";
 import "./css/reset.css";
 import "./css/common.css";
 import "./css/main.css";
+import "./css/Login.css";
 import live from "./images/common/Live.png";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoginModal from "./components/LoginModal";
+const userInfoInitial = () => {
+  return {
+    user_id: "",
+    user_pw: "",
+  };
+};
 
-function Header() {
+function Header({ isLogin }) {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState(() => {
+    return userInfoInitial();
+  });
+
+  const login = () => {
+    axios({
+      url: "http://localhost:5000/login",
+      method: "POST",
+      withCredentials: true,
+      data: {
+        user_id: userInfo.user_id,
+        user_pw: userInfo.user_pw,
+      },
+    })
+      .then((result) => {
+        console.log("result status : ", result.status);
+        if (result.status === 200 && userInfo.user_id === "admin") {
+          window.open("/", "_self");
+          navigate("/admin/qna");
+        } else if (result.status === 200 && userInfo.user_id !== "admin") {
+          window.open("/", "_self");
+          navigate("/");
+        }
+        if (result.status === 403) {
+          alert("일치하는 회원 정보가 없습니다.");
+        }
+      })
+      .catch(() => {
+        alert("일치하는 회원 정보가 없습니다.");
+      });
+  };
+  const [modalOpen, setModalOpen] = useState(false);
   const logout = () => {
     console.log("로그아웃 함수 실행");
     if (isLogin && window.confirm("로그아웃 하시겠습니까?")) {
@@ -23,31 +62,40 @@ function Header() {
         }
       });
       navigate("/");
+    } else if (isLogin) {
+    } else {
+      setModalOpen(true);
     }
   };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  const handleInputChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
 
-  useEffect(() => {
-    try {
-      axios({
-        url: "http://localhost:5000/login/success",
-        method: "GET",
-        withCredentials: true,
-      })
-        .then((result) => {
-          if (result.data) {
-            setIsLogin(true);
-            console.log("Header useEffect");
-          }
-        })
-        .catch((error) => {
-          console.log("로그아웃상태");
-          console.log(error);
-        });
-    } catch (error) {
-      console.log(error);
+  const goToJoinUs = () => {
+    navigate("/joinus");
+    setModalOpen(false);
+  };
+
+  const goToFindID = () => {
+    setModalOpen(false);
+    navigate("/findid");
+  };
+
+  const goToFindPW = () => {
+    setModalOpen(false);
+    navigate("/findpw");
+  };
+
+  const goToMyPage = () => {
+    if (isLogin) {
+      navigate("/mypage/checkout");
+    } else {
+      navigate("/joinus");
     }
-  }, []);
-
+  };
   return (
     <>
       <header id="header">
@@ -99,9 +147,6 @@ function Header() {
                         </li>
                       </ul>
                     </li>
-                    <li>
-                      <Link to="/aboutTeam/aboutUs">기획의도</Link>
-                    </li>
                   </ul>
                 </li>
                 <li>
@@ -144,9 +189,6 @@ function Header() {
                     <li>
                       <Link to="/fan/board">자유게시판</Link>
                     </li>
-                    <li>
-                      <Link to="/fan/gallery">갤러리</Link>
-                    </li>
                   </ul>
                 </li>
                 <li>
@@ -178,14 +220,73 @@ function Header() {
             <div className="util_menu">
               <ul>
                 <li>
-                  <Link to={!isLogin && "/login"}>
-                    <span onClick={logout}>{isLogin ? "LOGOUT" : "LOGIN"}</span>
-                  </Link>
+                  <React.Fragment>
+                    <button
+                      className="header_util_menu_button"
+                      onClick={logout}
+                    >
+                      {isLogin ? "LOGOUT" : "LOGIN"}
+                    </button>
+                    <LoginModal open={modalOpen} close={closeModal}>
+                      <div className="wrapper">
+                        <h1 className="login_title">LOGIN</h1>
+                        <h4>파이어폭스 회원 로그인</h4>
+                        <div className="user_id">
+                          <p>아이디</p>
+                          <input
+                            onChange={handleInputChange}
+                            name="user_id"
+                            value={userInfo.user_id}
+                            className="login_form"
+                            type="text"
+                            id="user_id"
+                            placeholder="  ID"
+                          />
+                        </div>
+                        <div className="user_pw">
+                          <p>비밀번호</p>
+                          <input
+                            onChange={handleInputChange}
+                            name="user_pw"
+                            value={userInfo.user_pw}
+                            className="login_form"
+                            type="password"
+                            id="user_pw"
+                            placeholder="  Password"
+                          />
+                        </div>
+                        <div className="login_txt_left">
+                          <input type="checkbox" id="save_id" />
+                          <span>아이디 저장</span>
+                        </div>
+                        <button onClick={login} className="login_button1">
+                          로그인
+                        </button>
+                        <br />
+                        <div className="joinus_button">
+                          <span className="login_txt_q">
+                            파이어 폭스 회원이 아니세요?&nbsp;&nbsp;&nbsp;
+                          </span>
+                          <button onClick={goToJoinUs} className="button2">
+                            JOIN US
+                          </button>
+                        </div>
+                        <div className="login_find">
+                          <button onClick={goToFindID}>아이디 찾기</button>
+                          <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                          <button onClick={goToFindPW}>비밀번호 찾기</button>
+                        </div>
+                      </div>
+                    </LoginModal>
+                  </React.Fragment>
                 </li>
                 <li>
-                  <Link to={isLogin ? "/mypage/checkout" : "/joinus"}>
-                    <span> {isLogin ? "MY PAGE" : "JOIN US"}</span>
-                  </Link>
+                  <button
+                    className="header_util_menu_button"
+                    onClick={goToMyPage}
+                  >
+                    {isLogin ? "MY PAGE" : "JOIN US"}
+                  </button>
                 </li>
               </ul>
             </div>

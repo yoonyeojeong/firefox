@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../css/article.css";
 import slogan_main from "../images/main/img_slogan_main.png";
 import tempImg from "../images/temp.jpg";

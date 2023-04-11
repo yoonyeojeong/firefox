@@ -60,7 +60,7 @@ function Footer() {
             <a href="/ETC/CU/ETCCUCUI01.do">고객문의</a>
           </li>
           <li>
-            <a href="/qna/my_qna">1:1문의</a>
+            <a href="/mypage/QnA">1:1문의</a>
           </li>
           <li>
             <a href="/ETC/TM/ETCTMSI01.do">사이트맵</a>
