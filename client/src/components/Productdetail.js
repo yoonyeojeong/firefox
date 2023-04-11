@@ -12,6 +12,28 @@ export default function Detail() {
   const [price, setPrice] = useState(0);
   const { num } = useParams();
 
+  const [userId, setUserId] = useState();
+  useEffect(() => {
+    try {
+      axios({
+        url: "http://localhost:5000/login/success",
+        method: "GET",
+        withCredentials: true,
+      })
+        .then((result) => {
+          if (result.data) {
+            setUserId(result.data.user_id);
+          }
+        })
+        .catch((error) => {
+          console.log("로그아웃상태");
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/selectProductDetail?num=" + num)
@@ -20,12 +42,12 @@ export default function Detail() {
         setGoods(res.data);
         setPrice(res.data[0].price);
       });
-  }, []);
+  }, [num]);
 
   const goToCheckout = () => {
+    console.log("goToCheckout userId : ", userId);
     if (true) {
       //login한 상태 확인 필요
-      const userId = "cjck12"; //store에 저장한 user id 로 변경해야함
       axios
         .post("http://localhost:5000/api/insertBasket", {
           id: userId,
@@ -70,14 +92,18 @@ export default function Detail() {
             <div className="item_info_box">
               <div className="item_tit_detail_cont">
                 <div className="item_detail_tit">
-                  <h3>{good.NAME}</h3>
+                  <h3 key={good.num}>{good.NAME}</h3>
                 </div>
                 <div className="item_detail_list">
                   <dl className="item_price">
                     <dt>판매가</dt>
                     <dd>
                       <strong>
-                        <strong>{good.price}</strong>
+                        <strong>
+                          {good.price
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </strong>
                       </strong>
                       원
                     </dd>
@@ -100,7 +126,9 @@ export default function Detail() {
                       <dt>총 합계금액</dt>
                       <dd>
                         <strong className="total_price">
-                          {price}
+                          {price
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           <b>원</b>
                         </strong>
                       </dd>

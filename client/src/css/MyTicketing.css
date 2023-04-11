@@ -1,0 +1,57 @@
+.myticketing {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: center;
+}
+
+.myticketing_box {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 700px;
+  padding: 20px;
+}
+.myticketing_content_box > tr > td {
+  vertical-align: middle;
+}
+
+.myticketing_content_box > tr:first-child {
+  border-top: solid 2px rgb(255, 192, 0);
+}
+
+.myticketing_content_box > tr > td {
+  font-size: 18px;
+  padding: 10px;
+  border-bottom: solid 1px rgb(255, 192, 0);
+  line-height: 130%;
+}
+
+.myticketing_box > p {
+  text-align: left;
+  margin: 10px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.myticketing_button {
+  font-size: 15px;
+  background-color: #656565;
+  border-radius: 3px;
+  padding: 4px;
+  width: 100px;
+  height: 40px;
+}
+.myticketing_txt_left {
+  text-align: left;
+  width: 500px;
+}
+
+.myticketing_button_box {
+  text-align: right;
+}
+
+.myticketing_txt {
+  width: 150px;
+}

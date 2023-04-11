@@ -1,32 +1,34 @@
 import "./css/App.css";
-import Header from "./Header";
-import Article from "./pages/Article";
-import Footer from "./Footer";
-import AboutTeam from "./pages/AboutTeam";
-import AboutCompany from "./pages/AboutCompany";
-import AboutHistory from "./pages/AboutHistory";
-import AboutPark from "./pages/AboutPark";
-import AboutUs from "./pages/AboutUs";
-import MajorPlayers from "./pages/Major_players";
-import MinorPlayers from "./pages/Minor_players";
-import Major from "./pages/Major";
-import Minor from "./pages/Minor";
+import Header from "./Header"; // 홈페이지 헤더 부분
+import Article from "./pages/Article"; // 홈페이지 메인화면
+import Footer from "./Footer"; // 홈페이지 Footer 부분
+import AboutTeam from "./pages/AboutTeam"; // 팀 소개 화면
+import AboutCompany from "./pages/AboutCompany"; // 그룹사 소개 화면
+import AboutHistory from "./pages/AboutHistory"; // 팀원 소개 화면
+import AboutPark from "./pages/AboutPark"; // 야구장 소개 화면
+import AboutUs from "./pages/AboutUs"; // 기획의도 화면
+import MajorPlayers from "./pages/Major_players"; // 1군 선수 소개
+import MinorPlayers from "./pages/Minor_players"; // 2군 선수 소개
+import Major from "./pages/Major"; // 1군 경기 일정
+import Minor from "./pages/Minor"; // 2군 경기 일정
 import Notice from "./pages/Notice";
 import NoticeDetail from "./pages/NoticeDetail";
+import NoticeSearch from "./pages/NoticeSearch";
 import Board from "./pages/Board";
 import BoardPost from "./pages/BoardPost";
 import BoardContents from "./pages/BoardContents";
 import BoardSearch from "./pages/BoardSearch";
-import Gallery from "./pages/Gallery";
 import Shop from "./pages/Shop";
 import ProductDetail from "./components/Productdetail";
 import Ticket from "./pages/Ticket";
-import Payment from "./ticketPay/Payment/Pages/RadyPayment";
+import Payment from "./ticketPay/Payment/Pages/ReadyPayment";
+import PayResult from "./ticketPay/Payment/Pages/PayResult";
 import Ticketing from "../src/pages/Ticketing";
 import QnA from "./pages/QnA";
 import MyQnA from "./pages/MyQnA";
 import MyQnAContents from "./pages/MyQnAContents";
-import Login from "./pages/Login";
+import MyTicket from "./pages/MyTicket";
+import MyTicketing from "../src/pages/MyTicketing";
 import JoinUs from "./pages/JoinUs";
 import FindId from "./pages/FindId";
 import FindPw from "./pages/FindPw";
@@ -51,16 +53,43 @@ import "./css/common.css";
 import "./css/main.css";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import axios from "axios";
 
 function App() {
-  const token = useSelector((state) => state.Auth.token);
-  console.log("app.js token : ", token);
-
-  const [user, setUser] = useState();
   const [isAdmin, setIsAdmin] = useState(); // 관리자 페이지 들어가려면 useState(1)로 설정하고 테스트
   const [isLogin, setIsLogin] = useState(); // 마이 페이지 들어가려면 useState(1)로 설정하고 테스트
+  const [user_id, setUser_id] = useState();
 
+  useEffect(() => {
+    try {
+      axios({
+        url: "http://localhost:5000/login/success",
+        method: "GET",
+        withCredentials: true,
+      })
+        .then((result) => {
+          if (result.data) {
+            setIsLogin(true);
+            console.log("로그인상태");
+            setUser_id(result.data.user_id);
+            if (result.data.user_id === "admin") {
+              setIsAdmin(true);
+            }
+          }
+        })
+        .catch((error) => {
+          console.log("로그아웃상태");
+          setIsLogin(false);
+          setIsAdmin(false);
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  console.log("App.js isLogin? ", isLogin);
+  console.log("App.js user_id? : ", user_id);
   return (
     <BrowserRouter>
       <div className="App">
@@ -70,345 +99,400 @@ function App() {
             path="/"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <Article />
                 <Footer />
               </>
             }
-          ></Route>
+          />
+
+          {/*//////////// FireFOX 메뉴 ////////////*/}
+          {/* 구단소개, 그룹사 소개, HISTORY, 야구장 소개, 기획 의도 */}
+          {/* 사용된 Component */}
+          {/* AboutTeam, AboutCompany, AboutHistory, AboutPark, AboutUs */}
 
           {/* 구단소개 화면*/}
           <Route
             path="/aboutTeam/aboutTeam"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <AboutTeam />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 그룹사소개 화면*/}
           <Route
             path="/aboutTeam/aboutCompany"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <AboutCompany />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* HISTORY 화면*/}
           <Route
             path="/aboutTeam/aboutHistory"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <AboutHistory />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 야구장소개 화면*/}
           <Route
             path="/aboutTeam/aboutPark"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <AboutPark />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 기획의도 화면*/}
           <Route
             path="/aboutTeam/aboutUs"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <AboutUs />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 1군 선수 화면*/}
           <Route
             path="/players/major_players"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <MajorPlayers />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 2군 선수 화면*/}
           <Route
             path="/players/minor_players"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <MinorPlayers />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 1군 일정 화면*/}
           <Route
             path="/game/major"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <Major />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 2군 일정 화면*/}
           <Route
             path="/game/minor"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <Minor />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 공지사항*/}
           <Route
             path="/fan/notice"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <Notice />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 공지사항 내용*/}
           <Route
             path="/fan/notice/:NUM"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <NoticeDetail />
                 <Footer />
               </>
             }
-          ></Route>
+          />
+          {/* 공지사항 글찾기 */}
+          <Route
+            path="/fan/notice/TITLE/:content"
+            element={
+              <>
+                <Header isLogin={isLogin} />
+                <NoticeSearch />
+                <Footer />
+              </>
+            }
+          />
 
           {/* 자유게시판 */}
           <Route
             path="/fan/board"
             element={
               <>
-                <Header />
-                <Board />
+                <Header isLogin={isLogin} />
+                <Board user_id={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 자유게시판 글찾기 */}
           <Route
             path="/fan/board/:option/:content"
             element={
               <>
-                <Header />
-                <BoardSearch />
+                <Header isLogin={isLogin} />
+                <BoardSearch user_id={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 자유게시판 글쓰기 */}
           <Route
             path="/fan/board/post"
             element={
               <>
-                <Header />
-                <BoardPost />
+                <Header isLogin={isLogin} />
+                <BoardPost user_id={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* 자유게시판 글 내용 */}
           <Route
             path="/fan/board/contents/:NUM"
             element={
               <>
-                <Header />
-                <BoardContents />
+                <Header isLogin={isLogin} />
+                <BoardContents user_id={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
-
-          {/* 갤러리 */}
-          <Route
-            path="/fan/gallery"
-            element={
-              <>
-                <Header />
-                <Gallery />
-                <Footer />
-              </>
-            }
-          ></Route>
+          />
 
           {/* SHOP */}
           <Route
             path="/shop"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <Shop />
                 <Footer />
               </>
             }
-          ></Route>
+          />
           {/* 상품상세 */}
           <Route
             path="/shop/detail/:num"
             element={
               <>
-                <Header />
-                <ProductDetail />
+                <Header isLogin={isLogin} />
+                <ProductDetail userId={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* Ticket */}
           <Route
             path="/ticket"
             element={
               <>
-                <Header />
-                <Ticket />
+                <Header isLogin={isLogin} />
+                <Ticket isLogin={isLogin} />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* Payment */}
           <Route
             path="/ticket/payment"
             element={
               <>
-                <Header />
-                <Payment />
+                <Header isLogin={isLogin} />
+                <Payment user_id={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
+          />
+          {/* Payresult */}
+          <Route
+            path="/ticket/payresult"
+            element={
+              <>
+                <Header isLogin={isLogin} />
+                <PayResult user_id={user_id} />
+                <Footer />
+              </>
+            }
+          />
           {/* Ticketing */}
           <Route
             path="/ticket/ticketing"
             element={
               <>
-                <Header />
-                <Ticketing />
+                <Header isLogin={isLogin} />
+                <Ticketing user_id={user_id} />
                 <Footer />
               </>
             }
-          ></Route>
-
-          {/* LOGIN */}
-          <Route
-            path="/login"
-            element={
-              <>
-                <Header />
-                <Login />
-                <Footer />
-              </>
-            }
-          ></Route>
+          />
 
           {/* JOIN US */}
           <Route
             path="/joinus"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <JoinUs />
                 <Footer />
               </>
             }
-          ></Route>
+          />
 
           {/* FindId */}
           <Route
             path="/findid"
             element={
-              <>
-                <Header />
-                <FindId />
-                <Footer />
-              </>
+              !isLogin ? (
+                <>
+                  <Header isLogin={isLogin} />
+                  <FindId />
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Header isLogin={isLogin} />
+                  <Article />
+                  <Footer />
+                </>
+              )
             }
-          ></Route>
+          />
 
           {/* FindPw */}
           <Route
             path="/findpw"
             element={
-              <>
-                <Header />
-                <FindPw />
-                <Footer />
-              </>
+              !isLogin ? (
+                <>
+                  <Header isLogin={isLogin} />
+                  <FindPw />
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Header isLogin={isLogin} />
+                  <Article />
+                  <Footer />
+                </>
+              )
             }
-          ></Route>
+          />
 
           {/* MyPage */}
           <Route
             path="/mypage/myinfo"
             element={
-              user ? (
-                <>
-                  <Header />
-                  <div className="mypage_layout">
-                    <Sidemenu />
-                    <MyInfo />
+              isLogin ? (
+                !isAdmin ? (
+                  <>
+                    <Header isLogin={isLogin} />
+                    <div className="mypage_layout">
+                      <Sidemenu />
+                      <MyInfo user_id={user_id} />
+                    </div>
+                    <Footer />
+                  </>
+                ) : (
+                  <div className="admin_layout">
+                    <AdminSidemenu />
+                    <AdminQnA />
                   </div>
-
-                  <Footer />
-                </>
+                )
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <NeedLogin />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* 장바구니 페이지 */}
           <Route
             path="/mypage/checkout"
             element={
               isLogin ? (
+                !isAdmin ? (
+                  <>
+                    <Header isLogin={isLogin} />
+                    <div className="mypage_layout">
+                      <Sidemenu />
+                      <Checkout userId={user_id} />
+                    </div>
+                    <Footer />
+                  </>
+                ) : (
+                  <div className="admin_layout">
+                    <AdminSidemenu />
+                    <AdminQnA />
+                  </div>
+                )
+              ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
+                  <NeedLogin />
+                  <Footer />
+                </>
+              )
+            }
+          />
+
+          {/* MyTicketing 나의 티켓예매  */}
+          <Route
+            path="/mypage/myticket"
+            element={
+              isLogin ? (
+                <>
+                  <Header isLogin={isLogin} />
                   <div className="mypage_layout">
                     <Sidemenu />
-                    <Checkout />
+                    <MyTicket user_id={user_id} />
                   </div>
                   <Footer />
                 </>
@@ -420,7 +504,29 @@ function App() {
                 </>
               )
             }
-          ></Route>
+          />
+          {/* MyTicketing 나의 티켓예매  */}
+          <Route
+            path="/mypage/myticketing/:id"
+            element={
+              isLogin ? (
+                <>
+                  <Header isLogin={isLogin} />
+                  <div className="mypage_layout">
+                    <Sidemenu />
+                    <MyTicketing user_id={user_id} />
+                  </div>
+                  <Footer />
+                </>
+              ) : (
+                <>
+                  <Header isLogin={isLogin} />
+                  <NeedLogin />
+                  <Footer />
+                </>
+              )
+            }
+          />
 
           {/* 회원 QnA 페이지 */}
           <Route
@@ -428,22 +534,22 @@ function App() {
             element={
               isLogin ? (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <div className="mypage_layout">
                     <Sidemenu />
-                    <QnA />
+                    <QnA user_id={user_id} />
                   </div>
                   <Footer />
                 </>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <NeedLogin />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminQnA */}
           <Route
@@ -456,13 +562,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* 회원 MyQnA (상세) */}
           <Route
@@ -470,48 +576,48 @@ function App() {
             element={
               isLogin ? (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <div className="mypage_layout">
                     <Sidemenu />
-                    <MyQnA />
+                    <MyQnA user_id={user_id} />
                   </div>
                   <Footer />
                 </>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <NeedLogin />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* 회원 MyQnA (답변확인페이지) */}
           <Route
-            path="/mypage/myQnAcontents"
+            path="/mypage/myQnAcontents/:qna_id"
             element={
               isLogin ? (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <div className="mypage_layout">
                     <Sidemenu />
-                    <MyQnAContents />
+                    <MyQnAContents user_id={user_id} />
                   </div>
                   <Footer />
                 </>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <NeedLogin />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
           {/* AdminQnAContent */}
           <Route
-            path="/admin/adminQnAcontent"
+            path="/admin/adminQnAcontent/:qna_id"
             element={
               isAdmin ? (
                 <div className="admin_layout">
@@ -520,13 +626,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminPlayers (선수관리) */}
           <Route
@@ -539,13 +645,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminSchedule (일정관리) */}
           <Route
@@ -558,13 +664,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminGoods (굿즈관리) */}
           <Route
@@ -577,13 +683,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminUser (회원정보보기) */}
           <Route
@@ -596,13 +702,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminNotice (공지사항등록) */}
           <Route
@@ -615,13 +721,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminNoticeDetail (공지사항 수정시 내용) */}
           <Route
@@ -634,13 +740,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminBoard (게시판관리) */}
           <Route
@@ -653,13 +759,13 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* AdminPhoto (사진등록) */}
           <Route
@@ -672,25 +778,25 @@ function App() {
                 </div>
               ) : (
                 <>
-                  <Header />
+                  <Header isLogin={isLogin} />
                   <Whoops404 />
                   <Footer />
                 </>
               )
             }
-          ></Route>
+          />
 
           {/* Whoops404 */}
           <Route
             path="/*"
             element={
               <>
-                <Header />
+                <Header isLogin={isLogin} />
                 <Whoops404 />
                 <Footer />
               </>
             }
-          ></Route>
+          />
         </Routes>
       </div>
     </BrowserRouter>

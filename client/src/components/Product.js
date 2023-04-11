@@ -10,7 +10,9 @@ function Product({ num, name, category, price, goods_img }) {
           <img src={goods_img} alt="" />
           <p>{name}</p>
           <p className="product_price">
-            <strong>&#8361; {price}</strong>
+            <strong>
+              &#8361; {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </strong>
           </p>
         </div>
       </div>

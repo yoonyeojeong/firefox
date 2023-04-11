@@ -12,6 +12,12 @@ function Sidemenu() {
         <div className="sidemenu_option">장바구니</div>
       </NavLink>
       <NavLink
+        to="/mypage/myticketing"
+        style={({ isActive }) => ({ color: isActive ? "rgb(255,192,0" : "" })}
+      >
+        <div className="sidemenu_option">나의 티켓예매</div>
+      </NavLink>
+      <NavLink
         to="/mypage/myinfo"
         style={({ isActive }) => ({ color: isActive ? "rgb(255,192,0" : "" })}
       >

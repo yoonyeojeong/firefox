@@ -4,11 +4,11 @@ import "./css/reset.css";
 import "./css/common.css";
 import "./css/main.css";
 import live from "./images/common/Live.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Header() {
-  const [user, setUser] = useState();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
   const logout = () => {
     console.log("로그아웃 함수 실행");
@@ -19,9 +19,10 @@ function Header() {
         withCredentials: true,
       }).then((result) => {
         if (result.status === 200) {
+          window.open("/", "_self");
         }
       });
-      setTimeout(window.location.reload(), 1000);
+      navigate("/");
     }
   };
 
@@ -35,7 +36,6 @@ function Header() {
         .then((result) => {
           if (result.data) {
             setIsLogin(true);
-            setUser(result.data);
             console.log("Header useEffect");
           }
         })

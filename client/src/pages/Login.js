@@ -3,9 +3,6 @@ import "../css/Login.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import useFetch from "../hooks/useFetch";
-import { useDispatch } from "react-redux";
-import { setToken } from "../reducer/AuthReducer";
 
 const userInfoInitial = () => {
   return {
@@ -16,7 +13,6 @@ const userInfoInitial = () => {
 
 function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState(() => {
     return userInfoInitial();
   });
@@ -30,12 +26,20 @@ function Login() {
         user_id: userInfo.user_id,
         user_pw: userInfo.user_pw,
       },
-    }).then((result) => {
-      if (result.status === 200) {
-        window.open("/", "_self");
-      }
-    });
-    navigate("/");
+    })
+      .then((result) => {
+        console.log("result status : ", result.status);
+        if (result.status === 200 && userInfo.user_id == "admin") {
+          window.open("/", "_self");
+          navigate("/admin/qna");
+        } else if (result.status === 200 && userInfo.user_id != "admin") {
+          window.open("/", "_self");
+          navigate("/");
+        }
+      })
+      .catch(() => {
+        alert("일치하는 회원 정보가 없습니다.");
+      });
   };
   const handleInputChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
